@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cat-spring",
+    "name": "Spring Mattresses",
+    "slug": "spring-mattresses",
+    "description": "Engineered spring support with pressure-balanced comfort.",
+    "image": "/images/products/spring-signature.svg",
+    "productCount": 2
+  },
+  {
+    "id": "cat-latex",
+    "name": "Latex Mattresses",
+    "slug": "latex-mattresses",
+    "description": "Natural breathability and resilient body support.",
+    "image": "/images/products/latex-organic.svg",
+    "productCount": 2
+  },
+  {
+    "id": "cat-foam",
+    "name": "Foam Mattresses",
+    "slug": "foam-mattresses",
+    "description": "Adaptive layers designed for premium body contouring.",
+    "image": "/images/products/foam-copper.svg",
+    "productCount": 2
+  },
+  {
+    "id": "cat-coir",
+    "name": "Coir Mattresses",
+    "slug": "coir-mattresses",
+    "description": "Firm coir construction for durability and orthopaedic support.",
+    "image": "/images/categories/coir-mattress.png",
+    "productCount": 1
+  },
+  {
+    "id": "cat-pillows",
+    "name": "Pillows",
+    "slug": "pillows",
+    "description": "Sleep accessories that improve neck and shoulder comfort.",
+    "image": "/images/products/pillow-memory.svg",
+    "productCount": 1
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "id": "prd-coir-align",
+  "slug": "wave-body-align-coir",
+  "name": "Wave Body Align Pro",
+  "brand": "Restolex",
+  "category": "Mattress",
+  "subcategory": "Coir Mattress",
+  "shortDescription": "With luxurious memory foam Euro-top padding and a core of natural liquid latex-sprayed natural coir and the body supportive qualities of rebounded & high density foam. Feel the tension in your muscles melt away and enjoy deep, healing rest.",
+  "description": "A plush orthopedic mattress featuring a Euro-top for enhanced comfort and zoned wave support for precise spinal alignment. It delivers premium softness without compromising back health. Designed for those seeking luxury-level spine care.",
+  "images": [
+    "/images/products/coir/wave-body-align-coir.png",
+    "/images/products/coir/wave-body-align-coir-2.png",
+    "/images/products/coir/wave-body-align-coir-3.png",
+    "/images/products/coir/wave-body-align-coir-4.png",
+    "/images/products/coir/wave-body-align-coir-5.png",
+    "/images/products/coir/wave-body-align-coir-6.png",
+    "/images/products/coir/wave-body-align-coir-7.png",
+    "/images/products/coir/wave-body-align-coir-8.png"
+  ],
+  "sizes": ["72x30", "72x36", "72x48", "75x48", "75x60", "78x60", "78x72", "84x72"],
+  "warranty": "10 Years",
+  "thickness": "8 inch",
+  "featureTiles": {
+    "feel": "Medium Soft",
+    "coverType": "Anti-stress knitted fabric with PU & memory foam quilting",
+    "usp": "Anti stress knitted fabric, natural coir block, pressure relieving memory foam, air-ventilated wave foam",
+    "coreMaterial": "Super soft comfyfoam with euro-top foam, 5 zone orthopaedic wave foam, natural coir block, anti skid fabric"
+  },
+  "commercial": {
+    "reviews": "776 Reviews",
+    "recentInterest": "7,500 added to cart in the last 7 days",
+    "warrantyBadge": "10 YEARS Warranty",
+    "mrp": "₹21,086",
+    "sellingPrice": "₹17,923",
+    "discountText": "15% off (Incl of all Taxes)"
+  },
+  "testimonials": [
+    {
+      "title": "Outstanding Customer Service",
+      "quote": "Excellent service by entire Restolex team. We took guidance through product features and selected the right mattress. Delivery was prompt.",
+      "author": "Veena Sachdev",
+      "rating": 5
+    },
+    {
+      "title": "Organic Pillows and Protectors - Pure Luxury",
+      "quote": "The organic pillows are a dream come true. Paired with the mattress protector they make sleep cleaner and incredibly comfortable.",
+      "author": "Sethu M",
+      "rating": 5
+    },
+    {
+      "title": "Eco-Friendly Comfort",
+      "quote": "I chose the Natural Coir Mattress for its eco-friendly materials, and I am thrilled with the comfort it provides. Firm yet breathable.",
+      "author": "Samantha",
+      "rating": 5
+    }
+  ]
+}

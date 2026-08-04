@@ -1,0 +1,36 @@
+{
+  "id": "prd-backpro-elite",
+  "slug": "backpro-elite-support",
+  "name": "BackPro Elite Support",
+  "brand": "Restolex",
+  "category": "Mattress",
+  "subcategory": "Spring Mattress",
+  "description": "Orthopaedic spring mattress designed for spinal alignment and long-term back comfort.",
+  "images": [
+    "/images/products/backpro-elite.svg",
+    "/images/products/backpro-elite-2.svg"
+  ],
+  "features": ["Orthopaedic zoning", "Edge support", "Anti-sag design"],
+  "specifications": [
+    { "label": "Construction", "value": "Spring + Rebonded Foam" },
+    { "label": "Top Layer", "value": "Knitted Fabric" },
+    { "label": "Best For", "value": "Back Pain Relief" }
+  ],
+  "sizes": ["72x36", "75x60", "78x72"],
+  "warranty": "8 Years",
+  "material": "Spring + Rebonded Foam",
+  "comfort": "Balanced",
+  "firmness": "Medium Firm",
+  "thickness": "8 inch",
+  "tags": ["orthopaedic", "support", "durable"],
+  "faqs": [
+    {
+      "question": "Can senior citizens use this mattress?",
+      "answer": "Yes, it provides stable support and easier movement while sleeping."
+    },
+    {
+      "question": "Is it suitable for heavy users?",
+      "answer": "The reinforced edge support improves structural stability for long-term use."
+    }
+  ]
+}

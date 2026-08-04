@@ -1,0 +1,33 @@
+{
+  "id": "prd-pillow-memory",
+  "slug": "memory-contour-pillow",
+  "name": "Memory Contour Pillow",
+  "brand": "Restolex",
+  "category": "Sleep Accessories",
+  "subcategory": "Pillows",
+  "description": "Ergonomic memory pillow built for neck alignment and pressure reduction.",
+  "images": ["/images/products/pillow-memory.svg", "/images/products/pillow-memory-2.svg"],
+  "features": ["Neck contour shape", "Slow rebound foam", "Washable outer cover"],
+  "specifications": [
+    { "label": "Construction", "value": "Memory Foam Core" },
+    { "label": "Cover", "value": "Breathable Zip Cover" },
+    { "label": "Best For", "value": "Neck Comfort" }
+  ],
+  "sizes": ["Standard"],
+  "warranty": "2 Years",
+  "material": "Memory Foam",
+  "comfort": "Soft",
+  "firmness": "Medium",
+  "thickness": "4 inch",
+  "tags": ["pillow", "contour", "accessory"],
+  "faqs": [
+    {
+      "question": "Can side sleepers use this pillow?",
+      "answer": "Yes, contour geometry helps support side and back sleeping positions."
+    },
+    {
+      "question": "Is the cover washable?",
+      "answer": "Yes, the outer zip cover is removable and washable."
+    }
+  ]
+}

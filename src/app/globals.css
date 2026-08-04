@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f5fb;
+  --foreground: #241f2b;
+  --card: #fffdff;
+  --card-foreground: #211c28;
+  --muted-foreground: #6b6675;
+  --border: #e4dcec;
+  --primary: #8a2b8f;
+  --primary-foreground: #ffffff;
+  --primary-strong: #6a1f70;
+  --secondary: #2b2733;
+  --secondary-strong: #201d27;
+  --secondary-foreground: #ffffff;
+  --brand-wine: #6a1f70;
+  --brand-gold: #c5a15b;
+  --brand-sand: #efe8f4;
+  --radius-card: 1.25rem;
+  --radius-button: 0.85rem;
+  --shadow-soft: 0 14px 30px -20px rgba(43, 39, 51, 0.35);
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 20px 40px -30px rgba(138, 43, 143, 0.32);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-strong: var(--primary-strong);
+  --color-secondary: var(--secondary);
+  --color-secondary-strong: var(--secondary-strong);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-brand-wine: var(--brand-wine);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-sand: var(--brand-sand);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-glow: var(--shadow-glow);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(197, 161, 91, 0.14), transparent 34%),
+    radial-gradient(circle at 88% 22%, rgba(138, 43, 143, 0.12), transparent 42%),
+    var(--background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), serif;
+}
+
+p,
+a,
+li,
+span,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body), sans-serif;
 }

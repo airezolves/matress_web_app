@@ -1,0 +1,44 @@
+{
+  "default": [
+    {
+      "title": "Outstanding Customer Service",
+      "quote": "Excellent service by the Restolex team. The consultation was patient and practical, and the delivery was smooth.",
+      "author": "Veena Sachdev",
+      "rating": 5
+    },
+    {
+      "title": "Organic Pillows and Protectors - Pure Luxury",
+      "quote": "The organic pillows paired with the protector made my sleep environment cleaner and more comfortable.",
+      "author": "Sethu M",
+      "rating": 5
+    },
+    {
+      "title": "Eco-Friendly Comfort",
+      "quote": "I chose the natural coir mattress for its eco-friendly materials and I am thrilled with the comfort and support.",
+      "author": "Samantha",
+      "rating": 5
+    }
+  ],
+  "byProduct": {
+    "wave-body-align-coir": [
+      {
+        "title": "Outstanding Customer Service",
+        "quote": "Excellent service by entire Restolex team. We took guidance through product features and selected the right mattress. Delivery was prompt.",
+        "author": "Veena Sachdev",
+        "rating": 5
+      },
+      {
+        "title": "Organic Pillows and Protectors - Pure Luxury",
+        "quote": "The organic pillows are a dream come true. Paired with the mattress protector they make sleep cleaner and incredibly comfortable.",
+        "author": "Sethu M",
+        "rating": 5
+      },
+      {
+        "title": "Eco-Friendly Comfort",
+        "quote": "I chose the Natural Coir Mattress for its eco-friendly materials, and I am thrilled with the comfort it provides. Firm yet breathable.",
+        "author": "Samantha",
+        "rating": 5
+      }
+    ]
+  }
+}

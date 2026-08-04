@@ -1,0 +1,33 @@
+{
+  "id": "prd-silvrest-prime",
+  "slug": "silvrest-prime-latex",
+  "name": "SilvRest Prime Latex",
+  "brand": "SilvRest",
+  "category": "Mattress",
+  "subcategory": "Latex Mattress",
+  "description": "Premium latex mattress tuned for pressure relief with supportive resilience and antimicrobial fabric.",
+  "images": ["/images/products/silvrest-prime.svg", "/images/products/silvrest-prime-2.svg"],
+  "features": ["Pressure-relief latex", "Antimicrobial fabric", "Multi-zone support"],
+  "specifications": [
+    { "label": "Construction", "value": "Latex + Zoned Foam" },
+    { "label": "Top Layer", "value": "Silver-infused knit" },
+    { "label": "Best For", "value": "Premium Comfort" }
+  ],
+  "sizes": ["72x48", "75x60", "78x72"],
+  "warranty": "10 Years",
+  "material": "Latex",
+  "comfort": "Plush",
+  "firmness": "Medium Soft",
+  "thickness": "9 inch",
+  "tags": ["silvrest", "luxury", "cool"],
+  "faqs": [
+    {
+      "question": "How is this different from standard latex models?",
+      "answer": "It includes zoned support and silver-infused fabric for a premium finish."
+    },
+    {
+      "question": "Can this reduce pressure points?",
+      "answer": "Yes, it is tuned for contouring around hips and shoulders."
+    }
+  ]
+}

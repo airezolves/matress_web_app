@@ -1,0 +1,41 @@
+{
+  "id": "prd-spring-signature",
+  "slug": "spring-signature-lux",
+  "name": "Spring Signature Lux",
+  "brand": "Restolex",
+  "category": "Mattress",
+  "subcategory": "Spring Mattress",
+  "description": "Premium pocket spring mattress offering balanced support, airflow channels, and plush quilting for luxury sleep.",
+  "images": [
+    "/images/products/spring-signature.svg",
+    "/images/products/spring-signature-2.svg"
+  ],
+  "features": [
+    "Pocket spring core",
+    "Euro top quilting",
+    "Breathable side ventilation",
+    "Motion isolation"
+  ],
+  "specifications": [
+    { "label": "Construction", "value": "Pocket Spring + Comfort Foam" },
+    { "label": "Top Layer", "value": "Luxury Quilted Fabric" },
+    { "label": "Best For", "value": "Back and Side Sleepers" }
+  ],
+  "sizes": ["72x36", "75x48", "78x60", "78x72"],
+  "warranty": "10 Years",
+  "material": "Pocket Spring",
+  "comfort": "Plush",
+  "firmness": "Medium",
+  "thickness": "10 inch",
+  "tags": ["luxury", "airflow", "couple-friendly"],
+  "faqs": [
+    {
+      "question": "Is this mattress good for couples?",
+      "answer": "Yes, the pocket spring layers reduce motion transfer for uninterrupted sleep."
+    },
+    {
+      "question": "Does this support hot sleepers?",
+      "answer": "The ventilated design improves airflow and keeps the sleep surface cooler."
+    }
+  ]
+}

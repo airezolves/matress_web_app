@@ -1,0 +1,33 @@
+{
+  "id": "prd-foam-copper",
+  "slug": "copper-cool-pro-foam",
+  "name": "Copper Cool Pro Foam",
+  "brand": "Restolex",
+  "category": "Mattress",
+  "subcategory": "Foam Mattress",
+  "description": "Advanced memory foam mattress with copper-infused cooling comfort layers and contour support.",
+  "images": ["/images/products/foam-copper.svg", "/images/products/foam-copper-2.svg"],
+  "features": ["Copper cooling foam", "Body contour support", "Silent sleep surface"],
+  "specifications": [
+    { "label": "Construction", "value": "Memory Foam + Support Base" },
+    { "label": "Top Layer", "value": "Cooling Knit Cover" },
+    { "label": "Best For", "value": "Urban Warm Climates" }
+  ],
+  "sizes": ["72x36", "75x60", "78x72"],
+  "warranty": "10 Years",
+  "material": "Memory Foam",
+  "comfort": "Soft",
+  "firmness": "Medium Soft",
+  "thickness": "8 inch",
+  "tags": ["cooling", "memory", "premium"],
+  "faqs": [
+    {
+      "question": "Does copper really help with cooling?",
+      "answer": "Copper-infused layers assist heat dissipation and improve thermal comfort."
+    },
+    {
+      "question": "Is this mattress suitable for side sleepers?",
+      "answer": "Yes, the contour foam helps reduce shoulder and hip pressure."
+    }
+  ]
+}

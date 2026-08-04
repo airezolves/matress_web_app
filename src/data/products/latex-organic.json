@@ -1,0 +1,36 @@
+{
+  "id": "prd-latex-organic",
+  "slug": "latex-organic-grand",
+  "name": "Latex Organic Grand",
+  "brand": "Restolex",
+  "category": "Mattress",
+  "subcategory": "Latex Mattress",
+  "description": "Natural latex comfort with responsive bounce and breathable layers for premium sleep hygiene.",
+  "images": [
+    "/images/products/latex-organic.svg",
+    "/images/products/latex-organic-2.svg"
+  ],
+  "features": ["Natural latex layer", "Hypoallergenic surface", "Open-cell airflow"],
+  "specifications": [
+    { "label": "Construction", "value": "Natural Latex + HR Foam" },
+    { "label": "Top Layer", "value": "Organic Cotton Knit" },
+    { "label": "Best For", "value": "Combination Sleepers" }
+  ],
+  "sizes": ["72x36", "75x60", "78x72"],
+  "warranty": "12 Years",
+  "material": "Natural Latex",
+  "comfort": "Luxury Soft",
+  "firmness": "Medium",
+  "thickness": "10 inch",
+  "tags": ["organic", "breathable", "premium"],
+  "faqs": [
+    {
+      "question": "Will latex mattress feel hot?",
+      "answer": "No, the open-cell latex structure supports better airflow than traditional foam."
+    },
+    {
+      "question": "Is it chemical-free?",
+      "answer": "It uses natural latex-focused construction with low-emission comfort materials."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "hero": {
+    "title": "Premium Sleep Starts With Better Selection",
+    "subtitle": "Authorized Restolex Dealer",
+    "description": "Explore luxury mattresses and comfort accessories from a trusted showroom partner with expert support for every sleep profile.",
+    "primaryCta": "Browse Products",
+    "secondaryCta": "Start Inquiry"
+  },
+  "whyChooseUs": [
+    "Authorized dealer with expert mattress consultation",
+    "Personalized recommendations for every sleep posture",
+    "Trusted after-sales support and warranty guidance",
+    "Transparent product comparison and no-pressure assistance"
+  ],
+  "brands": ["Restolex", "SilvRest", "DuoRoll", "Organic Series"],
+  "trustStats": [
+    { "label": "Years in Sleep Retail", "value": "20+" },
+    { "label": "Families Assisted", "value": "10,000+" },
+    { "label": "Verified Customer Rating", "value": "4.8/5" }
+  ]
+}

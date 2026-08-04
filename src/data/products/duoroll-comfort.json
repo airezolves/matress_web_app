@@ -1,0 +1,33 @@
+{
+  "id": "prd-duoroll-comfort",
+  "slug": "anti-stress-duoroll-comfort",
+  "name": "Anti Stress DuoRoll Comfort",
+  "brand": "DuoRoll",
+  "category": "Mattress",
+  "subcategory": "Foam Mattress",
+  "description": "Dual-comfort roll packed mattress offering reversible sides for seasonal preference.",
+  "images": ["/images/products/duoroll-comfort.svg", "/images/products/duoroll-comfort-2.svg"],
+  "features": ["Dual comfort sides", "Roll-packed convenience", "Quick setup"],
+  "specifications": [
+    { "label": "Construction", "value": "Dual Foam Layering" },
+    { "label": "Top Layer", "value": "Soft Touch Fabric" },
+    { "label": "Best For", "value": "Guest and Multipurpose Rooms" }
+  ],
+  "sizes": ["72x36", "75x48", "78x60"],
+  "warranty": "7 Years",
+  "material": "PU Foam",
+  "comfort": "Dual",
+  "firmness": "Medium",
+  "thickness": "6 inch",
+  "tags": ["duoroll", "reversible", "value"],
+  "faqs": [
+    {
+      "question": "Can I flip this mattress?",
+      "answer": "Yes, it is designed with two comfort profiles on opposite sides."
+    },
+    {
+      "question": "How long does expansion take after unboxing?",
+      "answer": "Most units expand within 24 to 48 hours."
+    }
+  ]
+}
