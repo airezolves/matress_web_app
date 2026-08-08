@@ -1,0 +1,31 @@
+[  {
+    "id": "mattress",
+    "name": "Mattress",
+    "image": "/images/home_page/product_categories/mattress.png",
+    "subcategory": "Mattress"
+  },
+  {
+    "id": "latex-mattresses",
+    "name": "Latex Mattress",
+    "image": "/images/home_page/product_categories/latex-mattresses.svg",
+    "subcategory": "Latex Mattresses"
+  },
+  {
+    "id": "foam-mattresses",
+    "name": "Foam Mattress",
+    "image": "/images/home_page/product_categories/foam-mattresses.svg",
+    "subcategory": "Foam Mattresses"
+  },
+  {
+    "id": "pillows",
+    "name": "Pillows",
+    "image": "/images/home_page/product_categories/pillows.svg",
+    "subcategory": "Pillows"
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories",
+    "image": "/images/home_page/product_categories/accessories.svg",
+    "subcategory": "Pillows"
+  }
+]

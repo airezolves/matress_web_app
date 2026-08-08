@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Trash2 } from "lucide-react";
+import { MessageCircle, Sparkles, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
+import { buildWhatsAppLink, selectionEnquiryMessage } from "@/lib/whatsapp";
 import { productService } from "@/services/product-service";
 import type { Product } from "@/types/product";
 
@@ -30,18 +31,36 @@ export function InquiryCartTable() {
 
   if (!enriched.length) {
     return (
-      <div className="rounded-[var(--radius-card)] border border-dashed border-border p-10 text-center">
-        <h2 className="font-heading text-3xl text-secondary">Inquiry cart is empty</h2>
-        <p className="mt-2 text-muted-foreground">Add products before submitting your inquiry.</p>
-        <Link href="/products" className="mt-5 inline-block">
-          <Button>Browse Products</Button>
+      <div className="rounded-[var(--radius-card)] border border-dashed border-border bg-white p-12 text-center shadow-soft">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <Sparkles className="h-6 w-6" />
+        </span>
+        <h2 className="mt-5 font-heading text-3xl uppercase tracking-[0.08em] text-secondary">
+          Your selection is empty
+        </h2>
+        <p className="mt-2 text-muted-foreground">
+          Browse the collection and add the mattresses you love. We&apos;ll help you take it from there.
+        </p>
+        <Link href="/products" className="mt-6 inline-block">
+          <Button>Explore Collection</Button>
         </Link>
       </div>
     );
   }
 
+  const selectionMessage = selectionEnquiryMessage(enriched.map((item) => item.product.name));
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
+      <div className="flex items-baseline justify-between">
+        <h2 className="font-heading text-3xl uppercase tracking-[0.06em] text-secondary">
+          My Selection
+        </h2>
+        <span className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          {enriched.length} {enriched.length === 1 ? "Product" : "Products"}
+        </span>
+      </div>
+
       <div className="space-y-3">
         {enriched.map((item) => (
           <div
@@ -78,13 +97,22 @@ export function InquiryCartTable() {
         ))}
       </div>
 
-      <div className="flex flex-wrap gap-3">
-        <Button variant="outline" onClick={clearCart}>
-          Clear Cart
-        </Button>
+      <div className="flex flex-wrap items-center gap-3 border-t border-border pt-5">
         <Link href="/inquiry">
-          <Button>Proceed to Inquiry</Button>
+          <Button>Request a Quote</Button>
         </Link>
+        <a
+          href={buildWhatsAppLink(selectionMessage)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-button)] bg-[#25D366] px-5 text-sm font-semibold text-white transition hover:brightness-110"
+        >
+          <MessageCircle className="h-4 w-4" />
+          WhatsApp Us
+        </a>
+        <Button variant="ghost" onClick={clearCart} className="ml-auto">
+          Clear Selection
+        </Button>
       </div>
     </div>
   );
