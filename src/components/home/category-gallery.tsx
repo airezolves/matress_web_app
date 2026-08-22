@@ -78,7 +78,7 @@ export function CategoryGallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: EASE, delay: index * 0.08 }}
-              className="group relative h-[460px] w-[78vw] shrink-0 overflow-hidden rounded-[2rem] border border-border bg-brand-neutral transition-all duration-500 sm:w-[52vw] md:w-[40%] lg:w-[30%] md:hover:w-[42%]"
+              className="group relative h-[340px] w-[78vw] shrink-0 overflow-hidden rounded-[2rem] border border-border bg-brand-neutral transition-all duration-500 sm:h-[400px] sm:w-[52vw] md:h-[460px] md:w-[40%] lg:w-[30%] md:hover:w-[42%]"
             >
               <Link href={category.href} className="block h-full w-full">
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-lavender/30 to-brand-neutral" />

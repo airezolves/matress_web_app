@@ -15,3 +15,12 @@ export const siteConfig = {
     { label: "YouTube", href: "https://youtube.com" }
   ]
 } as const;
+
+/** The studio that designed & built this website — shown as a credit in the footer. */
+export const developerConfig = {
+  name: "AI Rezolves",
+  tagline: "Websites & AI solutions for growing businesses",
+  email: "ai.rezolves@gmail.com",
+  phone: "+91 97314 19699",
+  logo: "/images/brand/ai-rezolves-logo.png"
+} as const;

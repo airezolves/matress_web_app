@@ -43,9 +43,9 @@ export function Navbar() {
           <Image
             src="/images/brand/business-logo.png"
             alt="Business logo"
-            width={38}
-            height={38}
-            className="h-9 w-9 rounded-xl"
+            width={56}
+            height={56}
+            className="h-12 w-12 rounded-xl object-contain md:h-14 md:w-14"
             priority
           />
           <span className="hidden flex-col leading-tight sm:flex">
@@ -81,7 +81,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/inquiry-cart"
-            className="relative inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-strong"
+            className="relative inline-flex h-11 items-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-strong active:scale-95"
             aria-label="Open my selection"
           >
             <Sparkles className="h-4 w-4" />
@@ -95,7 +95,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/80 lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white/80 active:scale-95 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
