@@ -42,7 +42,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-secondary/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <span className="absolute right-4 top-4 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-white/90 text-secondary opacity-0 shadow-soft backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute right-4 top-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-white/90 text-secondary opacity-0 shadow-soft backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 max-sm:translate-y-0 max-sm:opacity-100">
           <ArrowUpRight className="h-5 w-5" />
         </span>
       </Link>
@@ -52,7 +52,7 @@ export function ProductCard({ product }: { product: Product }) {
         onClick={() => setSaved((prev) => !prev)}
         aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
         aria-pressed={saved}
-        className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-secondary shadow-soft backdrop-blur transition hover:scale-105"
+        className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-secondary shadow-soft backdrop-blur transition hover:scale-105 active:scale-95"
       >
         <Heart className={cn("h-4 w-4 transition", saved && "fill-primary text-primary")} />
       </button>

@@ -68,7 +68,7 @@ export function InquiryCartTable() {
             key={item.productId}
             className="flex flex-col gap-4 rounded-[var(--radius-card)] border border-border bg-white p-4 shadow-soft sm:flex-row sm:items-center"
           >
-            <div className="relative h-24 w-full overflow-hidden rounded-xl sm:w-32">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl sm:aspect-auto sm:h-24 sm:w-32">
               <Image src={item.product.images[0]} alt={item.product.name} fill className="object-cover" />
             </div>
 
@@ -98,20 +98,20 @@ export function InquiryCartTable() {
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 border-t border-border pt-5">
-        <Link href="/inquiry">
-          <Button>Request a Quote</Button>
+      <div className="flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:flex-wrap sm:items-center">
+        <Link href="/inquiry" className="w-full sm:w-auto">
+          <Button className="w-full sm:w-auto">Request a Quote</Button>
         </Link>
         <a
           href={buildWhatsAppLink(selectionMessage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-button)] bg-[#25D366] px-5 text-sm font-semibold text-white transition hover:brightness-110"
+          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[var(--radius-button)] bg-[#25D366] px-5 text-sm font-semibold text-white transition hover:brightness-110 sm:w-auto"
         >
           <MessageCircle className="h-4 w-4" />
           WhatsApp Us
         </a>
-        <Button variant="ghost" onClick={clearCart} className="ml-auto">
+        <Button variant="ghost" onClick={clearCart} className="w-full sm:ml-auto sm:w-auto">
           Clear Selection
         </Button>
       </div>

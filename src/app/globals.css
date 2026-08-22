@@ -77,6 +77,34 @@ body {
   display: none;
 }
 
+/* Touch-friendly range slider thumbs (sleep-selector, feel-the-difference).
+   Inputs use appearance-none, so we draw an explicit, large-enough thumb. */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 3px solid var(--primary);
+  box-shadow: 0 4px 12px -4px rgba(36, 31, 37, 0.5);
+  cursor: pointer;
+  margin-top: -0.5rem;
+}
+input[type="range"]::-moz-range-thumb {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 3px solid var(--primary);
+  box-shadow: 0 4px 12px -4px rgba(36, 31, 37, 0.5);
+  cursor: pointer;
+}
+
 /* 3D fan carousel (card-fan-carousel.tsx) — cards are centered via negative
    margins so GSAP transforms (x/y/rotation/scale) compose cleanly on top. */
 .fan-layout {

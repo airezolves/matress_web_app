@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mr & Mrs Furnishings — Restolex Showroom Catalogue
 
-## Getting Started
+A premium, mobile-first digital showroom and product catalogue for **Mr & Mrs
+Furnishings**, an authorized Restolex dealer. Customers browse mattresses,
+pillows and sleep essentials, build a selection, and submit inquiries — all
+backed by a real database and deployed globally on Cloudflare at zero cost.
 
-First, run the development server:
+**Live site:**
+https://restolex-showroom-catalogue.restolex-showroom-catalogue.workers.dev
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Features
+
+- Curated product catalogue with live search, filtering, and sorting.
+- Product detail pages with images, specs, sizes, and FAQs.
+- Inquiry cart + form — submissions are stored in the database.
+- Admin API to add / update / delete products and read inquiries.
+- Fully responsive, mobile-first UI with tasteful motion and a 3D hero.
+- Persistent data in **Cloudflare D1** (the single source of truth).
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+| --- | --- |
+| Framework | Next.js 15 (App Router), React 19 |
+| Styling | Tailwind CSS v4 |
+| Motion / 3D | Framer Motion, react-three-fiber |
+| Database | Cloudflare D1 (SQLite) |
+| Runtime | Cloudflare Workers via OpenNext |
+| Tooling | Wrangler, TypeScript, ESLint |
+
+---
+
+## Project structure
+
+```
+src/
+  app/            App Router pages + API routes
+    api/          products, inquiry, admin endpoints
+  components/     UI, home, catalogue, product, inquiry, layout
+  lib/db/         D1 data-access layer (products, categories, inquiries)
+  services/       pure product helpers (search/filter/sort)
+  data/           source JSON used to seed the database
+migrations/       D1 schema + seed SQL
+docs/             ADMIN_GUIDE.md, LOCAL_DEVELOPMENT.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quick start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run db:migrate:local   # create + seed local database
+npm run dev                # http://localhost:3000
+```
 
-## Learn More
+For a production-parity run on the Cloudflare runtime, use `npm run preview`
+(http://localhost:8787). Full instructions: **[docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md)**.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Managing products & inquiries
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Products and inquiries are managed through a secured admin API (add / update /
+delete products, read inquiries). See **[docs/ADMIN_GUIDE.md](docs/ADMIN_GUIDE.md)**
+for endpoints, the product schema, and copy-paste examples.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment & CI/CD
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app runs as a single Cloudflare Worker with a D1 database binding.
+
+**Manual deploy:**
+
+```bash
+npx wrangler login
+npm run db:migrate:remote   # apply any new migrations
+npm run deploy
+```
+
+**Automatic deploy (GitHub Actions):** every push to `main` runs
+`.github/workflows/deploy.yml`, which installs dependencies, applies remote D1
+migrations, and deploys. It requires two repository secrets:
+
+- `CLOUDFLARE_API_TOKEN` — "Edit Cloudflare Workers" token, with D1 edit.
+- `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account id.
+
+The admin key is a Worker secret set once with `wrangler secret put ADMIN_API_KEY`
+and persists across deploys.
+
+---
+
+## Cost
+
+Runs comfortably within Cloudflare's free tier (100k requests/day, D1 free
+limits). Public GitHub repos get unlimited Actions minutes. No paid services are
+required.
+
+---
+
+## Documentation
+
+- **[docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md)** — run and verify the
+  site locally.
+- **[docs/ADMIN_GUIDE.md](docs/ADMIN_GUIDE.md)** — add / update / delete products
+  and read inquiries.
+
+---
+
+## Credits
+
+Designed & developed by **AI Rezolves** — websites & AI solutions for growing
+businesses.
+Email: ai.rezolves@gmail.com · Phone: +91 97314 19699

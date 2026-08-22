@@ -127,7 +127,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
                   type="button"
                   onClick={showPrev}
                   aria-label="Previous image"
-                  className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-secondary shadow-soft backdrop-blur transition hover:scale-105"
+                  className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-secondary shadow-soft backdrop-blur transition hover:scale-105 active:scale-95"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -135,7 +135,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
                   type="button"
                   onClick={showNext}
                   aria-label="Next image"
-                  className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-secondary shadow-soft backdrop-blur transition hover:scale-105"
+                  className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-secondary shadow-soft backdrop-blur transition hover:scale-105 active:scale-95"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -220,7 +220,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
             <AddToInquiryButton productId={product.id} />
           </FadeUp>
 
-          <div className="mt-8 grid grid-cols-2 gap-4">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {supportItems.map((item) => (
               <div
                 key={item.title}
@@ -245,7 +245,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
           <h2 className="font-heading text-3xl text-secondary md:text-4xl">Product Details</h2>
         </FadeUp>
 
-        <div className="mt-6 flex gap-8 border-b border-border">
+        <div className="mt-6 flex gap-4 overflow-x-auto border-b border-border sm:gap-8">
           {tabs.map((tab) => {
             const active = activeTab === tab.key;
             return (
@@ -254,7 +254,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
                 className={cn(
-                  "relative pb-3 text-base font-semibold transition",
+                  "relative shrink-0 whitespace-nowrap pb-3 text-base font-semibold transition",
                   active ? "text-secondary" : "text-muted-foreground hover:text-secondary"
                 )}
               >

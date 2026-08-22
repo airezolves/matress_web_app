@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   motion,
   useMotionValue,
@@ -15,6 +15,16 @@ import { ArrowRight, MoveRight, ShieldCheck, Star, Sparkles } from "lucide-react
 import CardFanCarousel, { type CardItem } from "@/components/ui/card-fan-carousel";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+// The 3D bed uses WebGL — load it only on the client, after hydration.
+const HeroBed3D = dynamic(() => import("./hero-bed-3d"), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="h-16 w-16 animate-pulse rounded-full bg-primary/10" />
+    </div>
+  )
+});
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -44,8 +54,6 @@ export function HeroSection() {
   const springX = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.4 });
   const springY = useSpring(pointerY, { stiffness: 120, damping: 18, mass: 0.4 });
 
-  const rotateX = useTransform(springY, [-0.5, 0.5], [-10, 10]);
-  const rotateZ = useTransform(springX, [-0.5, 0.5], [6, -6]);
   const glowX = useTransform(springX, [-0.5, 0.5], [30, 70]);
   const glowY = useTransform(springY, [-0.5, 0.5], [30, 70]);
   const glowBackground = useTransform(
@@ -145,60 +153,41 @@ export function HeroSection() {
 
           <motion.div
             variants={item}
-            className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 lg:mx-0"
+            className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-2 sm:gap-4 lg:mx-0"
           >
             {trustStats.map((stat) => (
               <div key={stat.value} className="text-center lg:text-left">
-                <p className="text-lg font-semibold text-secondary sm:text-xl">{stat.value}</p>
-                <p className="text-xs text-muted-foreground sm:text-sm">{stat.label}</p>
+                <p className="text-base font-semibold text-secondary sm:text-xl">{stat.value}</p>
+                <p className="text-[11px] text-muted-foreground sm:text-sm">{stat.label}</p>
               </div>
             ))}
           </motion.div>
         </motion.div>
 
-        {/* Right: 3D parallax visual */}
+        {/* Right: floating 3D bed */}
         <motion.div
           initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: reduceMotion ? 0 : 0.8, ease: EASE, delay: reduceMotion ? 0 : 0.2 }}
           onPointerMove={handlePointer}
           onPointerLeave={resetPointer}
-          className="relative mx-auto hidden w-full max-w-md [perspective:1200px] sm:block"
+          className="relative mx-auto w-full max-w-md"
         >
-          <motion.div
-            className="relative"
-            style={{ transformStyle: "preserve-3d" }}
-            animate={reduceMotion ? undefined : { rotateY: [0, 360] }}
-            transition={
-              reduceMotion
-                ? undefined
-                : { duration: 18, ease: "linear", repeat: Number.POSITIVE_INFINITY }
-            }
-          >
-            <motion.div
-              style={{ rotateX, rotateZ, transformStyle: "preserve-3d" }}
-              className="relative aspect-square rounded-[2rem] border border-border bg-gradient-to-br from-brand-lavender/70 via-white to-brand-neutral shadow-glow"
-            >
-            {/* moving highlight */}
+          <div className="relative aspect-square">
+            {/* soft glow behind the bed */}
             <motion.div
               aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[2rem]"
+              className="pointer-events-none absolute inset-6 rounded-full blur-3xl"
               style={{ background: glowBackground }}
             />
 
-            <Image
-              src="/images/home_page/product_categories/mattress.png"
-              alt="Signature mattress"
-              fill
-              priority
-              sizes="(max-width: 1024px) 60vw, 30vw"
-              className="object-contain p-8 [transform:translateZ(40px)]"
-            />
+            {/* The 3D bed canvas (transparent background) */}
+            <HeroBed3D />
 
-            {/* Floating feature chips */}
+            {/* Floating feature chips (parallax with pointer) */}
             <motion.div
               style={{ x: chipAX, y: chipAY }}
-              className="absolute left-3 top-6 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
+              className="pointer-events-none absolute left-1 top-4 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
             >
               <ShieldCheck className="h-3.5 w-3.5 text-primary" />
               10-year warranty
@@ -206,7 +195,7 @@ export function HeroSection() {
 
             <motion.div
               style={{ x: chipBX, y: chipBY }}
-              className="absolute right-3 top-1/3 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
+              className="pointer-events-none absolute right-1 top-1/3 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
             >
               <Star className="h-3.5 w-3.5 fill-accent text-accent" />
               4.8 / 5 rating
@@ -214,13 +203,12 @@ export function HeroSection() {
 
             <motion.div
               style={{ x: chipCX, y: chipCY }}
-              className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
+              className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
             >
               <Sparkles className="h-3.5 w-3.5 text-primary" />
               Orthopaedic support
             </motion.div>
-            </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 

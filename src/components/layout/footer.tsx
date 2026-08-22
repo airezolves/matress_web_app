@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, Mail, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 
-import { siteConfig } from "@/constants/site";
+import { developerConfig, siteConfig } from "@/constants/site";
 import { buildWhatsAppLink, generalEnquiryMessage } from "@/lib/whatsapp";
 
 export function Footer() {
@@ -82,6 +82,47 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-white/50 md:px-8">
         © {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
+      </div>
+
+      {/* Studio credit — professional agency tag to drive referral enquiries */}
+      <div className="border-t border-white/10 bg-secondary-strong">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-5 text-center sm:flex-row sm:text-left md:px-8 lg:pr-24">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
+              <Image
+                src={developerConfig.logo}
+                alt={`${developerConfig.name} logo`}
+                width={48}
+                height={48}
+                className="h-full w-full scale-[1.3] object-contain"
+              />
+            </span>
+            <div className="leading-tight">
+              <p className="text-sm text-white/80">
+                Designed &amp; developed by{" "}
+                <span className="font-semibold text-white">{developerConfig.name}</span>
+              </p>
+              <p className="text-xs text-white/45">{developerConfig.tagline}</p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-white/70">
+            <a
+              href={`mailto:${developerConfig.email}`}
+              className="inline-flex items-center gap-1.5 transition hover:text-white"
+            >
+              <Mail className="h-3.5 w-3.5 text-accent" />
+              {developerConfig.email}
+            </a>
+            <a
+              href={`tel:${developerConfig.phone.replace(/\s/g, "")}`}
+              className="inline-flex items-center gap-1.5 transition hover:text-white"
+            >
+              <PhoneCall className="h-3.5 w-3.5 text-accent" />
+              {developerConfig.phone}
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
