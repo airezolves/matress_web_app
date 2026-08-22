@@ -1,18 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useTransform,
-  type Variants
-} from "framer-motion";
-import { ArrowRight, MoveRight, ShieldCheck, Star, Sparkles } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRight, MoveRight, Sparkles } from "lucide-react";
 
 import CardFanCarousel, { type CardItem } from "@/components/ui/card-fan-carousel";
+import { ProductHeroVisual } from "@/components/home/product-hero-visual";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -38,42 +31,6 @@ const trustStats = [
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
 
-  // Pointer-driven 3D tilt for the hero visual
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const springX = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.4 });
-  const springY = useSpring(pointerY, { stiffness: 120, damping: 18, mass: 0.4 });
-
-  const rotateX = useTransform(springY, [-0.5, 0.5], [-10, 10]);
-  const rotateZ = useTransform(springX, [-0.5, 0.5], [6, -6]);
-  const glowX = useTransform(springX, [-0.5, 0.5], [30, 70]);
-  const glowY = useTransform(springY, [-0.5, 0.5], [30, 70]);
-  const glowBackground = useTransform(
-    [glowX, glowY],
-    (values) => {
-      const [x, y] = values as number[];
-      return `radial-gradient(40% 40% at ${x}% ${y}%, rgba(255,255,255,0.65), transparent 70%)`;
-    }
-  );
-
-  const chipAX = useTransform(springX, [-0.5, 0.5], [22, -22]);
-  const chipAY = useTransform(springY, [-0.5, 0.5], [16, -16]);
-  const chipBX = useTransform(springX, [-0.5, 0.5], [-26, 26]);
-  const chipBY = useTransform(springY, [-0.5, 0.5], [-14, 14]);
-  const chipCX = useTransform(springX, [-0.5, 0.5], [18, -18]);
-  const chipCY = useTransform(springY, [-0.5, 0.5], [24, -24]);
-
-  const handlePointer = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (reduceMotion) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
-    pointerY.set((event.clientY - rect.top) / rect.height - 0.5);
-  };
-  const resetPointer = () => {
-    pointerX.set(0);
-    pointerY.set(0);
-  };
-
   const container: Variants = {
     hidden: {},
     show: {
@@ -87,7 +44,7 @@ export function HeroSection() {
 
   return (
     <section className="relative overflow-hidden px-4 pb-6 pt-8 md:px-8 md:pt-12">
-      {/* Ambient glow */}
+      {/* Ambient section glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -156,71 +113,14 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Right: 3D parallax visual */}
+        {/* Right: realistic mattress render with subtle parallax + float */}
         <motion.div
           initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: reduceMotion ? 0 : 0.8, ease: EASE, delay: reduceMotion ? 0 : 0.2 }}
-          onPointerMove={handlePointer}
-          onPointerLeave={resetPointer}
-          className="relative mx-auto hidden w-full max-w-md [perspective:1200px] sm:block"
+          className="hidden sm:block"
         >
-          <motion.div
-            className="relative"
-            style={{ transformStyle: "preserve-3d" }}
-            animate={reduceMotion ? undefined : { rotateY: [0, 360] }}
-            transition={
-              reduceMotion
-                ? undefined
-                : { duration: 18, ease: "linear", repeat: Number.POSITIVE_INFINITY }
-            }
-          >
-            <motion.div
-              style={{ rotateX, rotateZ, transformStyle: "preserve-3d" }}
-              className="relative aspect-square rounded-[2rem] border border-border bg-gradient-to-br from-brand-lavender/70 via-white to-brand-neutral shadow-glow"
-            >
-            {/* moving highlight */}
-            <motion.div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[2rem]"
-              style={{ background: glowBackground }}
-            />
-
-            <Image
-              src="/images/home_page/product_categories/mattress.png"
-              alt="Signature mattress"
-              fill
-              priority
-              sizes="(max-width: 1024px) 60vw, 30vw"
-              className="object-contain p-8 [transform:translateZ(40px)]"
-            />
-
-            {/* Floating feature chips */}
-            <motion.div
-              style={{ x: chipAX, y: chipAY }}
-              className="absolute left-3 top-6 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
-            >
-              <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-              10-year warranty
-            </motion.div>
-
-            <motion.div
-              style={{ x: chipBX, y: chipBY }}
-              className="absolute right-3 top-1/3 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
-            >
-              <Star className="h-3.5 w-3.5 fill-accent text-accent" />
-              4.8 / 5 rating
-            </motion.div>
-
-            <motion.div
-              style={{ x: chipCX, y: chipCY }}
-              className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full border border-border bg-white/90 px-3 py-1.5 text-xs font-medium text-secondary shadow-soft backdrop-blur"
-            >
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
-              Orthopaedic support
-            </motion.div>
-            </motion.div>
-          </motion.div>
+          <ProductHeroVisual />
         </motion.div>
       </div>
 

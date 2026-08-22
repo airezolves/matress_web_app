@@ -39,22 +39,19 @@ export function Navbar() {
         transition={{ duration: 0.4, ease: EASE }}
         className="flex w-full max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 backdrop-blur-xl md:px-6"
       >
-        <Link href="/" className="flex items-center gap-3" aria-label={`${siteConfig.name} home`}>
+        <Link href="/" className="flex items-center gap-2.5" aria-label={`${siteConfig.name} home`}>
           <Image
             src="/images/brand/business-logo.png"
-            alt="Business logo"
-            width={38}
-            height={38}
-            className="h-9 w-9 rounded-xl"
+            alt={siteConfig.name}
+            width={1024}
+            height={400}
             priority
+            className="h-10 w-auto object-contain md:h-12"
           />
-          <span className="hidden flex-col leading-tight sm:flex">
-            <span className="font-heading text-lg font-semibold text-secondary md:text-xl">
-              {siteConfig.name}
-            </span>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
-              Authorized Restolex Dealer
-            </span>
+          <span className="hidden border-l border-border pl-2.5 text-[9px] uppercase leading-tight tracking-[0.22em] text-muted-foreground sm:block">
+            Authorized
+            <br />
+            Restolex Dealer
           </span>
         </Link>
 
