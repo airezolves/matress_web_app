@@ -7,6 +7,7 @@ export const siteConfig = {
   whatsapp: "+91 81230 18558",
   email: "sales@restolexgallerystudio.com",
   address: "MG Road, Bengaluru, Karnataka, India",
+  hours: "Mon – Sun · 10:00 AM – 8:00 PM",
   mapEmbedUrl: "https://maps.google.com",
   socials: [
     { label: "Instagram", href: "https://instagram.com" },

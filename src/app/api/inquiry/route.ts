@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { inquiryService } from "@/services/inquiry-service";
 import { inquirySchema } from "@/types/inquiry";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const json = (await request.json()) as { customer: unknown; productIds: unknown };

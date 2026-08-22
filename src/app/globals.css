@@ -1,25 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f5fb;
-  --foreground: #241f2b;
-  --card: #fffdff;
-  --card-foreground: #211c28;
-  --muted-foreground: #6b6675;
-  --border: #e4dcec;
-  --primary: #8a2b8f;
+  /* Quiet-luxury palette: warm ivory surfaces with deep plum accents */
+  --background: #faf7f2;
+  --foreground: #241f25;
+  --card: #ffffff;
+  --card-foreground: #241f25;
+  --muted-foreground: #6e6670;
+  --border: #ebe4e6;
+  --primary: #5b3568;
   --primary-foreground: #ffffff;
-  --primary-strong: #6a1f70;
-  --secondary: #2b2733;
-  --secondary-strong: #201d27;
+  --primary-strong: #472850;
+  --secondary: #241f25;
+  --secondary-strong: #191519;
   --secondary-foreground: #ffffff;
-  --brand-wine: #6a1f70;
-  --brand-gold: #c5a15b;
-  --brand-sand: #efe8f4;
-  --radius-card: 1.25rem;
-  --radius-button: 0.85rem;
-  --shadow-soft: 0 14px 30px -20px rgba(43, 39, 51, 0.35);
-  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 20px 40px -30px rgba(138, 43, 143, 0.32);
+  --accent: #8d6a9d;
+  --brand-wine: #472850;
+  --brand-gold: #8d6a9d;
+  --brand-sand: #f3efea;
+  --brand-lavender: #e9ddef;
+  --brand-ivory: #faf7f2;
+  --brand-neutral: #f3efea;
+  --radius-card: 1.5rem;
+  --radius-button: 0.9rem;
+  --shadow-soft: 0 18px 44px -26px rgba(36, 31, 37, 0.32);
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.6), 0 30px 60px -34px rgba(91, 53, 104, 0.3);
 }
 
 @theme inline {
@@ -35,9 +40,13 @@
   --color-secondary: var(--secondary);
   --color-secondary-strong: var(--secondary-strong);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
   --color-brand-wine: var(--brand-wine);
   --color-brand-gold: var(--brand-gold);
   --color-brand-sand: var(--brand-sand);
+  --color-brand-lavender: var(--brand-lavender);
+  --color-brand-ivory: var(--brand-ivory);
+  --color-brand-neutral: var(--brand-neutral);
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
   --shadow-soft: var(--shadow-soft);
@@ -49,11 +58,99 @@ body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background:
-    radial-gradient(circle at 12% 15%, rgba(197, 161, 91, 0.14), transparent 34%),
-    radial-gradient(circle at 88% 22%, rgba(138, 43, 143, 0.12), transparent 42%),
+    radial-gradient(circle at 12% 12%, rgba(141, 106, 157, 0.1), transparent 38%),
+    radial-gradient(circle at 88% 20%, rgba(91, 53, 104, 0.08), transparent 44%),
     var(--background);
+}
+
+/* Hide scrollbars on horizontal editorial rails */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 3D fan carousel (card-fan-carousel.tsx) — cards are centered via negative
+   margins so GSAP transforms (x/y/rotation/scale) compose cleanly on top. */
+.fan-layout {
+  position: relative;
+  height: 22rem;
+  perspective: 1200px;
+}
+@media (min-width: 480px) {
+  .fan-layout {
+    height: 26rem;
+  }
+}
+@media (min-width: 640px) {
+  .fan-layout {
+    height: 28rem;
+  }
+}
+@media (min-width: 768px) {
+  .fan-layout {
+    height: 34rem;
+  }
+}
+@media (min-width: 1024px) {
+  .fan-layout {
+    height: 38rem;
+  }
+}
+
+.fan-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9rem;
+  height: 13rem;
+  margin-left: -4.5rem;
+  margin-top: -6.5rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  opacity: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 50px -20px rgba(36, 31, 37, 0.45);
+  will-change: transform;
+}
+@media (min-width: 768px) {
+  .fan-card {
+    width: 11rem;
+    height: 16rem;
+    margin-left: -5.5rem;
+    margin-top: -8rem;
+  }
+}
+@media (min-width: 1024px) {
+  .fan-card {
+    width: 13rem;
+    height: 18.5rem;
+    margin-left: -6.5rem;
+    margin-top: -9.25rem;
+  }
+}
+
+/* Respect user motion preferences: disable heavy motion + parallax */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 h1,
