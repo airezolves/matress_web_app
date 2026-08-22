@@ -1,9 +1,9 @@
 import { CategoryCard } from "@/components/catalogue/category-card";
 import { SectionHeading } from "@/components/home/section-heading";
-import { productService } from "@/services/product-service";
+import { listCategories } from "@/lib/db/categories";
 
-export function FeaturedCategories() {
-  const categories = productService.getAllCategories();
+export async function FeaturedCategories() {
+  const categories = await listCategories();
 
   return (
     <section className="px-4 py-16 md:px-8">

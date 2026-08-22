@@ -6,8 +6,8 @@ import { MessageCircle, Sparkles, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
+import { useAllProducts } from "@/hooks/use-all-products";
 import { buildWhatsAppLink, selectionEnquiryMessage } from "@/lib/whatsapp";
-import { productService } from "@/services/product-service";
 import type { Product } from "@/types/product";
 
 type EnrichedCartItem = {
@@ -18,10 +18,11 @@ type EnrichedCartItem = {
 
 export function InquiryCartTable() {
   const { items, removeItem, updateQuantity, clearCart } = useInquiryCart();
+  const { products } = useAllProducts();
 
   const enriched = items
     .map((item) => {
-      const product = productService.getAllProducts().find((entry) => entry.id === item.productId);
+      const product = products.find((entry) => entry.id === item.productId);
       if (!product) {
         return null;
       }

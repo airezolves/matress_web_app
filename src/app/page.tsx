@@ -11,8 +11,10 @@ import { ShowroomCta } from "@/components/home/showroom-cta";
 import { SleepSelector } from "@/components/home/sleep-selector";
 import { TestimonialsScroller } from "@/components/home/testimonials-scroller";
 import testimonialsData from "@/data/testimonials.json";
-import { productService } from "@/services/product-service";
+import { listProducts } from "@/lib/db/products";
 import { createMetadata } from "@/utils/metadata";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = createMetadata(
   "Home",
@@ -42,13 +44,11 @@ const serviceHighlights = [
   }
 ];
 
-export default function Home() {
+export default async function Home() {
+  const products = await listProducts();
   const stories = [
     ...testimonialsData.default,
-    ...productService
-      .getAllProducts()
-      .flatMap((product) => product.testimonials ?? [])
-      .slice(0, 8)
+    ...products.flatMap((product) => product.testimonials ?? []).slice(0, 8)
   ];
 
   return (

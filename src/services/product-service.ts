@@ -1,8 +1,5 @@
 import Fuse from "fuse.js";
 
-import categories from "@/data/categories.json";
-import { products } from "@/data/products";
-import type { Category } from "@/types/category";
 import type { Product } from "@/types/product";
 
 export interface ProductFilters {
@@ -17,11 +14,28 @@ export interface ProductFilters {
   brand?: string[];
 }
 
-const fuse = new Fuse(products, {
-  includeScore: true,
-  threshold: 0.3,
-  keys: ["name", "description", "category", "subcategory", "features", "brand", "tags", "featureTiles.usp"]
-});
+export interface ProductFilterOptions {
+  category: string[];
+  subcategory: string[];
+  material: string[];
+  comfort: string[];
+  thickness: string[];
+  size: string[];
+  warranty: string[];
+  firmness: string[];
+  brand: string[];
+}
+
+const FUSE_KEYS = [
+  "name",
+  "description",
+  "category",
+  "subcategory",
+  "features",
+  "brand",
+  "tags",
+  "featureTiles.usp"
+];
 
 const hasSelectedFilters = (values?: string[]) => Boolean(values && values.length > 0);
 
@@ -33,39 +47,36 @@ const matchField = (value: string, selected?: string[]) => {
   return selected?.includes(value) ?? true;
 };
 
+/**
+ * Pure catalogue helpers. These operate on an in-memory product array (loaded
+ * from D1 on the server and passed to the client) so search/filter/sort stay
+ * instant and client-side, with no per-keystroke network cost.
+ */
 export const productService = {
-  getAllProducts(): Product[] {
-    return products;
+  getFeaturedProducts(products: Product[], count = 6): Product[] {
+    return products.slice(0, count);
   },
 
-  getFeaturedProducts(): Product[] {
-    return products.slice(0, 6);
-  },
-
-  getRelatedProducts(product: Product): Product[] {
+  getRelatedProducts(products: Product[], product: Product, count = 4): Product[] {
     return products
-      .filter((candidate) => candidate.id !== product.id && candidate.subcategory === product.subcategory)
-      .slice(0, 4);
+      .filter(
+        (candidate) =>
+          candidate.id !== product.id && candidate.subcategory === product.subcategory
+      )
+      .slice(0, count);
   },
 
-  getAllCategories(): Category[] {
-    return categories as Category[];
-  },
-
-  getProductBySlug(slug: string): Product | undefined {
-    return products.find((product) => product.slug === slug);
-  },
-
-  searchProducts(query: string): Product[] {
+  searchProducts(products: Product[], query: string): Product[] {
     if (!query.trim()) {
       return products;
     }
 
+    const fuse = new Fuse(products, { includeScore: true, threshold: 0.3, keys: FUSE_KEYS });
     return fuse.search(query).map((result) => result.item);
   },
 
-  filterProducts(initialProducts: Product[], filters: ProductFilters): Product[] {
-    return initialProducts.filter((product) => {
+  filterProducts(products: Product[], filters: ProductFilters): Product[] {
+    return products.filter((product) => {
       const sizeMatch =
         !hasSelectedFilters(filters.size) ||
         product.sizes.some((sizeOption) => filters.size?.includes(sizeOption));
@@ -93,8 +104,8 @@ export const productService = {
     });
   },
 
-  sortProducts(list: Product[], sortBy: string): Product[] {
-    const sorted = [...list];
+  sortProducts(products: Product[], sortBy: string): Product[] {
+    const sorted = [...products];
 
     if (sortBy === "name-asc") {
       sorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -109,5 +120,24 @@ export const productService = {
     }
 
     return sorted;
+  },
+
+  buildFilterOptions(products: Product[]): ProductFilterOptions {
+    const unique = (selector: (value: Product) => string | undefined) =>
+      Array.from(
+        new Set(products.map(selector).filter((item): item is string => Boolean(item)))
+      ).sort();
+
+    return {
+      category: unique((item) => item.category),
+      subcategory: unique((item) => item.subcategory),
+      material: unique((item) => item.material),
+      comfort: unique((item) => item.comfort),
+      thickness: unique((item) => item.thickness),
+      size: Array.from(new Set(products.flatMap((item) => item.sizes))).sort(),
+      warranty: unique((item) => item.warranty),
+      firmness: unique((item) => item.firmness),
+      brand: unique((item) => item.brand)
+    };
   }
 };

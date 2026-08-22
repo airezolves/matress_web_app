@@ -5,10 +5,11 @@ import { ArrowRight } from "lucide-react";
 import { FadeUp, ScaleIn } from "@/components/animation/motion-primitives";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Button } from "@/components/ui/button";
+import { listProducts } from "@/lib/db/products";
 import { productService } from "@/services/product-service";
 
-export function FeaturedCollection() {
-  const [feature, ...rest] = productService.getFeaturedProducts();
+export async function FeaturedCollection() {
+  const [feature, ...rest] = productService.getFeaturedProducts(await listProducts());
   const supporting = rest.slice(0, 3);
 
   if (!feature) {

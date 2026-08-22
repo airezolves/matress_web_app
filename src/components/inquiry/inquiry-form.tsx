@@ -12,8 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { inquiryConfig } from "@/config/inquiry-config";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
+import { useAllProducts } from "@/hooks/use-all-products";
 import { buildWhatsAppLink, selectionEnquiryMessage } from "@/lib/whatsapp";
-import { productService } from "@/services/product-service";
 import { inquirySchema, type InquiryPayload, type InquiryResponse } from "@/types/inquiry";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -61,6 +61,7 @@ function Field({
 export function InquiryForm() {
   const reduce = useReducedMotion();
   const { items, clearCart } = useInquiryCart();
+  const { products } = useAllProducts();
 
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -79,11 +80,10 @@ export function InquiryForm() {
   } = useForm<InquiryPayload>({ mode: "onTouched", resolver: zodResolver(inquirySchema) });
 
   const selectionNames = useMemo(() => {
-    const all = productService.getAllProducts();
     return items
-      .map((item) => all.find((product) => product.id === item.productId)?.name)
+      .map((item) => products.find((product) => product.id === item.productId)?.name)
       .filter((name): name is string => Boolean(name));
-  }, [items]);
+  }, [items, products]);
 
   const isLastStep = step === steps.length - 1;
 

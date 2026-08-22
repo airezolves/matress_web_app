@@ -1,9 +1,10 @@
 import { ProductCard } from "@/components/catalogue/product-card";
 import { SectionHeading } from "@/components/home/section-heading";
+import { listProducts } from "@/lib/db/products";
 import { productService } from "@/services/product-service";
 
-export function FeaturedProducts() {
-  const products = productService.getFeaturedProducts();
+export async function FeaturedProducts() {
+  const products = productService.getFeaturedProducts(await listProducts());
 
   return (
     <section className="bg-white/60 px-4 py-16 md:px-8">
