@@ -26,7 +26,7 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 md:px-6 md:pt-5"
+      className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-2 md:px-6 md:pt-3"
       initial={false}
     >
       <motion.div
@@ -37,25 +37,17 @@ export function Navbar() {
           borderColor: scrolled ? "rgba(235, 228, 230, 0.9)" : "rgba(235, 228, 230, 0)"
         }}
         transition={{ duration: 0.4, ease: EASE }}
-        className="flex w-full max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 backdrop-blur-xl md:px-6"
+        className="flex w-full max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-1 backdrop-blur-xl md:px-6"
       >
-        <Link href="/" className="flex items-center gap-3" aria-label={`${siteConfig.name} home`}>
+        <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${siteConfig.name} home`}>
           <Image
-            src="/images/brand/business-logo.png"
-            alt="Business logo"
-            width={56}
-            height={56}
-            className="h-12 w-12 rounded-xl object-contain md:h-14 md:w-14"
+            src="/images/brand/mr-mrs-logo.png"
+            alt={siteConfig.name}
+            width={1054}
+            height={460}
+            className="h-20 w-auto max-w-full shrink object-contain sm:h-24 lg:h-24"
             priority
           />
-          <span className="hidden flex-col leading-tight sm:flex">
-            <span className="font-heading text-lg font-semibold text-secondary md:text-xl">
-              {siteConfig.name}
-            </span>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
-              Authorized Restolex Dealer
-            </span>
-          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
