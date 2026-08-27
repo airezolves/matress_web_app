@@ -74,10 +74,10 @@ export function Navbar() {
           <Link
             href="/inquiry-cart"
             className="relative inline-flex h-11 items-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-strong active:scale-95"
-            aria-label="Open my selection"
+            aria-label="Open my cart"
           >
             <Sparkles className="h-4 w-4" />
-            <span className="hidden sm:inline">My Selection</span>
+            <span className="hidden sm:inline">My Cart</span>
             {count > 0 && (
               <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-primary">
                 {count}
