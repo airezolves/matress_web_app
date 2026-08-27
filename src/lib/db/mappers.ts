@@ -1,12 +1,11 @@
 import type { Category } from "@/types/category";
 import type {
   Product,
-  ProductCommercial,
-  ProductFaq,
   ProductFeatureTiles,
-  ProductSpecification,
   ProductTestimonial
 } from "@/types/product";
+
+const FALLBACK_PRODUCT_IMAGE = "/images/products/spring-signature.svg";
 
 /** Raw row shape as stored in the D1 `products` table. */
 export interface ProductRow {
@@ -25,13 +24,14 @@ export interface ProductRow {
   warranty: string;
   images: string;
   features: string;
-  specifications: string;
   sizes: string;
   tags: string;
-  faqs: string;
   feature_tiles: string | null;
-  commercial: string | null;
   testimonials: string;
+  specifications: string | null;
+  care_instructions: string | null;
+  delivery_information: string | null;
+  return_policy: string | null;
   sort_order: number;
   is_active: number;
   created_at: string;
@@ -58,6 +58,10 @@ function parseJson<T>(value: string | null | undefined, fallback: T): T {
 }
 
 export function rowToProduct(row: ProductRow): Product {
+  const images = parseJson<string[]>(row.images, []).filter(
+    (source) => typeof source === "string" && source.trim().length > 0
+  );
+
   return {
     id: row.id,
     slug: row.slug,
@@ -67,9 +71,8 @@ export function rowToProduct(row: ProductRow): Product {
     subcategory: row.subcategory,
     shortDescription: row.short_description ?? undefined,
     description: row.description,
-    images: parseJson<string[]>(row.images, []),
+    images: images.length > 0 ? images : [FALLBACK_PRODUCT_IMAGE],
     features: parseJson<string[]>(row.features, []),
-    specifications: parseJson<ProductSpecification[]>(row.specifications, []),
     sizes: parseJson<string[]>(row.sizes, []),
     warranty: row.warranty,
     material: row.material ?? undefined,
@@ -77,14 +80,14 @@ export function rowToProduct(row: ProductRow): Product {
     firmness: row.firmness ?? undefined,
     thickness: row.thickness,
     tags: parseJson<string[]>(row.tags, []),
-    faqs: parseJson<ProductFaq[]>(row.faqs, []),
     featureTiles: row.feature_tiles
       ? parseJson<ProductFeatureTiles | undefined>(row.feature_tiles, undefined)
       : undefined,
-    commercial: row.commercial
-      ? parseJson<ProductCommercial | undefined>(row.commercial, undefined)
-      : undefined,
-    testimonials: parseJson<ProductTestimonial[]>(row.testimonials, [])
+    testimonials: parseJson<ProductTestimonial[]>(row.testimonials, []),
+    specificationDetails: row.specifications ?? undefined,
+    careInstructions: row.care_instructions ?? undefined,
+    deliveryInformation: row.delivery_information ?? undefined,
+    returnPolicy: row.return_policy ?? undefined
   };
 }
 

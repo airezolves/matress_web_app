@@ -34,7 +34,7 @@ export function AddToInquiryButton({ productId }: { productId: string }) {
               className="flex items-center gap-2"
             >
               <Check className="h-5 w-5" />
-              Added to My Selection
+              Added to My Cart
             </motion.span>
           ) : (
             <motion.span
@@ -46,7 +46,7 @@ export function AddToInquiryButton({ productId }: { productId: string }) {
               className="flex items-center gap-2"
             >
               <Plus className="h-5 w-5" />
-              Add to My Selection
+              Add to My Cart
             </motion.span>
           )}
         </AnimatePresence>

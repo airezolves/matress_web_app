@@ -1,27 +1,8 @@
-export interface ProductSpecification {
-  label: string;
-  value: string;
-}
-
-export interface ProductFaq {
-  question: string;
-  answer: string;
-}
-
 export interface ProductFeatureTiles {
-  feel: string;
-  coverType: string;
-  usp: string;
-  coreMaterial: string;
-}
-
-export interface ProductCommercial {
-  reviews: string;
-  recentInterest: string;
-  warrantyBadge: string;
-  mrp: string;
-  sellingPrice: string;
-  discountText: string;
+  feel?: string;
+  coverType?: string;
+  usp?: string;
+  coreMaterial?: string;
 }
 
 export interface ProductTestimonial {
@@ -42,7 +23,6 @@ export interface Product {
   description: string;
   images: string[];
   features?: string[];
-  specifications?: ProductSpecification[];
   sizes: string[];
   warranty: string;
   material?: string;
@@ -50,8 +30,10 @@ export interface Product {
   firmness?: string;
   thickness: string;
   tags?: string[];
-  faqs?: ProductFaq[];
   featureTiles?: ProductFeatureTiles;
-  commercial?: ProductCommercial;
   testimonials?: ProductTestimonial[];
+  specificationDetails?: string;
+  careInstructions?: string;
+  deliveryInformation?: string;
+  returnPolicy?: string;
 }

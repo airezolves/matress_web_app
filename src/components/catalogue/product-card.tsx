@@ -12,12 +12,14 @@ import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+const FALLBACK_IMAGE = "/images/products/spring-signature.svg";
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useInquiryCart();
   const reduce = useReducedMotion();
   const [added, setAdded] = useState(false);
   const [saved, setSaved] = useState(false);
+  const image = product.images.find((source) => source.trim()) ?? FALLBACK_IMAGE;
 
   const handleAdd = () => {
     addItem(product.id);
@@ -33,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <Link href={`/products/${product.slug}`} className="relative block h-60 overflow-hidden">
         <Image
-          src={product.images[0]}
+          src={image}
           alt={product.name}
           fill
           className={cn(
@@ -89,7 +91,7 @@ export function ProductCard({ product }: { product: Product }) {
                 className="flex items-center gap-2"
               >
                 <Check className="h-4 w-4" />
-                Added to Selection
+                Added to Cart
               </motion.span>
             ) : (
               <motion.span
@@ -101,7 +103,7 @@ export function ProductCard({ product }: { product: Product }) {
                 className="flex items-center gap-2"
               >
                 <Plus className="h-4 w-4" />
-                Add to Selection
+                Add to Cart
               </motion.span>
             )}
           </AnimatePresence>

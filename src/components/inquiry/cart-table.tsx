@@ -37,7 +37,7 @@ export function InquiryCartTable() {
           <Sparkles className="h-6 w-6" />
         </span>
         <h2 className="mt-5 font-heading text-3xl uppercase tracking-[0.08em] text-secondary">
-          Your selection is empty
+          Your cart is empty
         </h2>
         <p className="mt-2 text-muted-foreground">
           Browse the collection and add the mattresses you love. We&apos;ll help you take it from there.
@@ -55,7 +55,7 @@ export function InquiryCartTable() {
     <div className="space-y-6">
       <div className="flex items-baseline justify-between">
         <h2 className="font-heading text-3xl uppercase tracking-[0.06em] text-secondary">
-          My Selection
+          My Cart
         </h2>
         <span className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           {enriched.length} {enriched.length === 1 ? "Product" : "Products"}

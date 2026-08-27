@@ -56,7 +56,7 @@ export function Footer() {
               Find Your Mattress
             </Link>
             <Link href="/inquiry-cart" className="text-white/80 hover:text-white">
-              My Selection
+              My Cart
             </Link>
             <Link href="/about" className="text-white/80 hover:text-white">
               About Us
