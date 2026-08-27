@@ -6,7 +6,6 @@ export interface ProductFilters {
   category?: string[];
   subcategory?: string[];
   material?: string[];
-  comfort?: string[];
   thickness?: string[];
   size?: string[];
   warranty?: string[];
@@ -18,7 +17,6 @@ export interface ProductFilterOptions {
   category: string[];
   subcategory: string[];
   material: string[];
-  comfort: string[];
   thickness: string[];
   size: string[];
   warranty: string[];
@@ -86,7 +84,6 @@ export const productService = {
         filters.warranty?.some((warranty) => product.warranty.includes(warranty));
 
       const material = product.material ?? "";
-      const comfort = product.comfort ?? "";
       const thickness = product.thickness ?? "";
       const firmness = product.firmness ?? "";
 
@@ -94,7 +91,6 @@ export const productService = {
         matchField(product.category, filters.category) &&
         matchField(product.subcategory, filters.subcategory) &&
         matchField(material, filters.material) &&
-        matchField(comfort, filters.comfort) &&
         matchField(thickness, filters.thickness) &&
         matchField(firmness, filters.firmness) &&
         matchField(product.brand, filters.brand) &&
@@ -132,7 +128,6 @@ export const productService = {
       category: unique((item) => item.category),
       subcategory: unique((item) => item.subcategory),
       material: unique((item) => item.material),
-      comfort: unique((item) => item.comfort),
       thickness: unique((item) => item.thickness),
       size: Array.from(new Set(products.flatMap((item) => item.sizes))).sort(),
       warranty: unique((item) => item.warranty),

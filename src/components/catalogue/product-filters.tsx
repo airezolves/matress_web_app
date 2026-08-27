@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import {
   ArrowUpDown,
   Box,
-  Feather,
   Gauge,
   Layers,
   type LucideIcon,
@@ -25,7 +24,6 @@ interface FiltersOptionMap {
   category: string[];
   subcategory: string[];
   material: string[];
-  comfort: string[];
   thickness: string[];
   size: string[];
   warranty: string[];
@@ -48,7 +46,6 @@ interface ProductFiltersProps {
 const ADVANCED_FILTERS: Array<{ key: keyof ProductFilters; label: string; icon: LucideIcon }> = [
   { key: "subcategory", label: "Subcategory", icon: Layers },
   { key: "material", label: "Material", icon: Box },
-  { key: "comfort", label: "Comfort", icon: Feather },
   { key: "thickness", label: "Thickness", icon: Ruler },
   { key: "size", label: "Size", icon: Maximize2 },
   { key: "warranty", label: "Warranty", icon: ShieldCheck },

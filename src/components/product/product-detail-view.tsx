@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Headset, Layers, Leaf, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Headset, Layers, Leaf, Maximize2, ShieldCheck, Sparkles, Star } from "lucide-react";
 
 import { FadeUp, StaggerChild, StaggerChildren } from "@/components/animation/motion-primitives";
 import { ProductCard } from "@/components/catalogue/product-card";
@@ -35,6 +35,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
   const images = product.images.length > 0 ? product.images : ["/images/products/spring-signature.svg"];
   const isSofa = product.category.toLowerCase() === "sofa";
   const isPillow = product.subcategory.toLowerCase() === "pillows";
+  const pillowDimensions = isPillow ? product.featureTiles?.dimensions?.trim() : undefined;
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<TabKey>("description");
@@ -56,7 +57,10 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
       { label: "Feel", value: product.featureTiles?.feel || product.comfort },
       { label: "Cover Type", value: product.featureTiles?.coverType },
       { label: "USP", value: product.featureTiles?.usp },
-      { label: "Core Material", value: product.featureTiles?.coreMaterial || product.material }
+      { label: "Core Material", value: product.featureTiles?.coreMaterial || product.material },
+      ...(isPillow
+        ? [{ label: "Dimensions", value: pillowDimensions }]
+        : [])
     ];
 
     return tiles.filter((tile) => {
@@ -65,7 +69,7 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
       if (isPillow) return tile.label !== "Cover Type";
       return true;
     }) as Array<{ label: string; value: string }>;
-  }, [isPillow, isSofa, product]);
+  }, [isPillow, isSofa, pillowDimensions, product]);
 
   const normalizedSizes = product.sizes.map((size) => size.split("-")[0]);
   const thicknessValue = product.thickness.replace(/\s*inch(es)?\s*/i, "").trim();
@@ -196,19 +200,25 @@ export function ProductDetailView({ product, relatedProducts }: ProductDetailVie
 
           <FadeUp delay={0.08} className="mt-5 flex flex-wrap items-center gap-2 text-xs sm:mt-6">
             {warrantyBadge ? (
-              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 font-semibold text-primary">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-primary bg-primary px-3 py-1.5 font-semibold text-white shadow-sm">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 {warrantyBadge}
               </span>
             ) : null}
             {product.thickness ? (
-              <span className="rounded-full border border-border px-3 py-1.5 text-muted-foreground">
+              <span className="rounded-full border border-primary/30 bg-brand-lavender/60 px-3 py-1.5 font-semibold text-secondary">
                 {product.thickness}
               </span>
             ) : null}
             {product.firmness ? (
-              <span className="rounded-full border border-border px-3 py-1.5 text-muted-foreground">
+              <span className="rounded-full border border-primary/30 bg-brand-lavender/60 px-3 py-1.5 font-semibold text-secondary">
                 {product.firmness}
+              </span>
+            ) : null}
+            {pillowDimensions ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-brand-lavender/60 px-3 py-1.5 font-semibold text-secondary">
+                <Maximize2 className="h-3.5 w-3.5 text-primary" />
+                {pillowDimensions}
               </span>
             ) : null}
           </FadeUp>

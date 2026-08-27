@@ -17,7 +17,6 @@ const initialFilters: ProductFilters = {
   category: [],
   subcategory: [],
   material: [],
-  comfort: [],
   thickness: [],
   size: [],
   warranty: [],
