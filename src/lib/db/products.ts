@@ -7,7 +7,8 @@ import type { Product } from "@/types/product";
 const SELECT_COLUMNS = `
   id, slug, name, brand, category, subcategory, short_description, description,
   material, comfort, firmness, thickness, warranty, images, features,
-  specifications, sizes, tags, faqs, feature_tiles, commercial, testimonials,
+  sizes, tags, feature_tiles, testimonials, specifications, care_instructions,
+  delivery_information, return_policy,
   sort_order, is_active, created_at, updated_at
 `;
 
@@ -62,9 +63,10 @@ export async function createProduct(input: ProductInput): Promise<Product> {
       `INSERT OR REPLACE INTO products (
         id, slug, name, brand, category, subcategory, short_description, description,
         material, comfort, firmness, thickness, warranty, images, features,
-        specifications, sizes, tags, faqs, feature_tiles, commercial, testimonials,
+        sizes, tags, feature_tiles, testimonials, specifications, care_instructions,
+        delivery_information, return_policy,
         sort_order, is_active, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, datetime('now'))`
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, datetime('now'))`
     )
     .bind(
       input.id,
@@ -82,13 +84,14 @@ export async function createProduct(input: ProductInput): Promise<Product> {
       input.warranty,
       JSON.stringify(input.images ?? []),
       JSON.stringify(input.features ?? []),
-      JSON.stringify(input.specifications ?? []),
       JSON.stringify(input.sizes ?? []),
       JSON.stringify(input.tags ?? []),
-      JSON.stringify(input.faqs ?? []),
       input.featureTiles ? JSON.stringify(input.featureTiles) : null,
-      input.commercial ? JSON.stringify(input.commercial) : null,
       JSON.stringify(input.testimonials ?? []),
+      input.specificationDetails ?? null,
+      input.careInstructions ?? null,
+      input.deliveryInformation ?? null,
+      input.returnPolicy ?? null,
       nextOrder
     )
     .run();
