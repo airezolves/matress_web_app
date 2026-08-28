@@ -5,6 +5,7 @@ import {
   ArrowUpDown,
   Box,
   Gauge,
+  HeartHandshake,
   Layers,
   type LucideIcon,
   Maximize2,
@@ -23,6 +24,7 @@ import type { ProductFilters } from "@/services/product-service";
 interface FiltersOptionMap {
   category: string[];
   subcategory: string[];
+  usecase: string[];
   material: string[];
   thickness: string[];
   size: string[];
@@ -42,8 +44,11 @@ interface ProductFiltersProps {
   clearFilters: () => void;
 }
 
+type FilterOptionKey = keyof FiltersOptionMap;
+
 // Secondary, less-frequently-used filters tucked behind the "Filters" toggle.
-const ADVANCED_FILTERS: Array<{ key: keyof ProductFilters; label: string; icon: LucideIcon }> = [
+const ADVANCED_FILTERS: Array<{ key: FilterOptionKey; label: string; icon: LucideIcon }> = [
+  { key: "usecase", label: "Shop by need", icon: HeartHandshake },
   { key: "subcategory", label: "Subcategory", icon: Layers },
   { key: "material", label: "Material", icon: Box },
   { key: "thickness", label: "Thickness", icon: Ruler },
@@ -53,7 +58,21 @@ const ADVANCED_FILTERS: Array<{ key: keyof ProductFilters; label: string; icon: 
   { key: "brand", label: "Brand", icon: Tag }
 ];
 
-const ALL_FIELDS: Array<keyof ProductFilters> = ["category", ...ADVANCED_FILTERS.map((entry) => entry.key)];
+const ALL_FIELDS: Array<keyof ProductFilters> = [
+  "category",
+  ...ADVANCED_FILTERS.map((entry) => entry.key)
+];
+
+const USECASE_LABELS: Record<string, string> = {
+  orthopedic: "Orthopaedic Support",
+  cooling: "Cooling Sleep",
+  couples: "Couple-Friendly Sleep",
+  "pressure relief": "Pressure Relief",
+  natural: "Natural Sleep",
+  pillow: "Pillows & Neck Support",
+  "sofa bed": "Sofa Beds",
+  sofa: "Living Room Seating"
+};
 
 export function ProductFiltersPanel({
   query,
@@ -67,6 +86,7 @@ export function ProductFiltersPanel({
 }: ProductFiltersProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const selectedCategory = filters.category?.[0] ?? "";
+  const selectedUsecase = filters.usecase?.[0] ?? "";
 
   const activeCount = useMemo(
     () => ALL_FIELDS.filter((key) => (filters[key]?.[0] ?? "") !== "").length,
@@ -178,7 +198,7 @@ export function ProductFiltersPanel({
                 <option value="">All {label}</option>
                 {options[key].map((option) => (
                   <option key={option} value={option}>
-                    {option}
+                    {key === "usecase" ? USECASE_LABELS[option] : option}
                   </option>
                 ))}
               </Select>
@@ -188,7 +208,7 @@ export function ProductFiltersPanel({
       )}
 
       {/* Active filter chips + clear-all */}
-      {(activeChips.length > 0 || selectedCategory) && (
+      {(activeChips.length > 0 || selectedCategory || selectedUsecase) && (
         <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border/70 pt-4">
           <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Active:</span>
           {selectedCategory && (
@@ -197,7 +217,7 @@ export function ProductFiltersPanel({
           {activeChips.map((chip) => (
             <Chip
               key={chip.key}
-              label={`${chip.label}: ${chip.value}`}
+              label={`${chip.label}: ${chip.key === "usecase" ? USECASE_LABELS[chip.value] : chip.value}`}
               onRemove={() => onFilterChange(chip.key, "")}
             />
           ))}

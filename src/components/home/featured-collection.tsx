@@ -17,7 +17,7 @@ export async function FeaturedCollection() {
   }
 
   return (
-    <section className="px-4 py-20 md:px-8">
+    <section className="px-4 pb-20 pt-8 md:px-8 md:pt-10">
       <div className="mx-auto max-w-7xl">
         <FadeUp className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>

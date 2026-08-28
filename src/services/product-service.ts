@@ -5,6 +5,7 @@ import type { Product } from "@/types/product";
 export interface ProductFilters {
   category?: string[];
   subcategory?: string[];
+  usecase?: string[];
   material?: string[];
   thickness?: string[];
   size?: string[];
@@ -16,6 +17,7 @@ export interface ProductFilters {
 export interface ProductFilterOptions {
   category: string[];
   subcategory: string[];
+  usecase: string[];
   material: string[];
   thickness: string[];
   size: string[];
@@ -23,6 +25,17 @@ export interface ProductFilterOptions {
   firmness: string[];
   brand: string[];
 }
+
+const USECASE_OPTIONS = [
+  "orthopedic",
+  "cooling",
+  "couples",
+  "pressure relief",
+  "natural",
+  "pillow",
+  "sofa bed",
+  "sofa"
+];
 
 const FUSE_KEYS = [
   "name",
@@ -86,10 +99,16 @@ export const productService = {
       const material = product.material ?? "";
       const thickness = product.thickness ?? "";
       const firmness = product.firmness ?? "";
+      const usecaseMatch =
+        !hasSelectedFilters(filters.usecase) ||
+        filters.usecase?.some((usecase) =>
+          product.tags?.some((tag) => tag.toLowerCase() === usecase.toLowerCase())
+        );
 
       return (
         matchField(product.category, filters.category) &&
         matchField(product.subcategory, filters.subcategory) &&
+        usecaseMatch &&
         matchField(material, filters.material) &&
         matchField(thickness, filters.thickness) &&
         matchField(firmness, filters.firmness) &&
@@ -127,6 +146,7 @@ export const productService = {
     return {
       category: unique((item) => item.category),
       subcategory: unique((item) => item.subcategory),
+      usecase: USECASE_OPTIONS,
       material: unique((item) => item.material),
       thickness: unique((item) => item.thickness),
       size: Array.from(new Set(products.flatMap((item) => item.sizes))).sort(),

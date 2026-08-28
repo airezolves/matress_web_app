@@ -105,31 +105,30 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
-/* 3D fan carousel (card-fan-carousel.tsx) — cards are centered via negative
-   margins so GSAP transforms (x/y/rotation/scale) compose cleanly on top. */
+/* Shop-by-need carousel cards are centered so GSAP can step them one slot at a time. */
 .fan-layout {
   position: relative;
-  height: 22rem;
+  height: 15rem;
   perspective: 1200px;
 }
 @media (min-width: 480px) {
   .fan-layout {
-    height: 26rem;
+    height: 16rem;
   }
 }
 @media (min-width: 640px) {
   .fan-layout {
-    height: 28rem;
+    height: 17rem;
   }
 }
 @media (min-width: 768px) {
   .fan-layout {
-    height: 34rem;
+    height: 18rem;
   }
 }
 @media (min-width: 1024px) {
   .fan-layout {
-    height: 38rem;
+    height: 21rem;
   }
 }
 

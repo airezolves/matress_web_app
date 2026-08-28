@@ -16,6 +16,7 @@ const ProductFiltersPanel = dynamic(
 const initialFilters: ProductFilters = {
   category: [],
   subcategory: [],
+  usecase: [],
   material: [],
   thickness: [],
   size: [],
@@ -29,19 +30,22 @@ interface ProductsCatalogViewProps {
   initialQuery?: string;
   initialSubcategory?: string;
   initialFirmness?: string;
+  initialUsecase?: string;
 }
 
 export function ProductsCatalogView({
   initialProducts,
   initialQuery = "",
   initialSubcategory = "",
-  initialFirmness = ""
+  initialFirmness = "",
+  initialUsecase = ""
 }: ProductsCatalogViewProps) {
   const [query, setQuery] = useState(initialQuery);
   const [filters, setFilters] = useState<ProductFilters>(() => ({
     ...initialFilters,
     subcategory: initialSubcategory ? [initialSubcategory] : [],
-    firmness: initialFirmness ? [initialFirmness] : []
+    firmness: initialFirmness ? [initialFirmness] : [],
+    usecase: initialUsecase ? [initialUsecase] : []
   }));
   const [sortBy, setSortBy] = useState("name-asc");
 

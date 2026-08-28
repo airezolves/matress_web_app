@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 
 export interface CardItem {
   imgUrl: string;
-  alt?: string;
+  title: string;
+  description: string;
   linkUrl?: string;
 }
 
@@ -13,17 +15,16 @@ interface SocialCardsProps {
   cards: CardItem[];
 }
 
-const MAX_VISIBLE = 7;
-const HALF = 3;
+const MAX_VISIBLE = 5;
+const HALF = 2;
+const AUTO_ADVANCE_MS = 3500;
 
 const FAN_POSITIONS = [
-  { rot: -21, scale: 0.7756, x: -30, y: 7.3, zIndex: 1 },
-  { rot: -14, scale: 0.8498, x: -22, y: 4.0, zIndex: 2 },
-  { rot: -7, scale: 0.9346, x: -11, y: 1.3, zIndex: 3 },
-  { rot: 0, scale: 1.0, x: 0, y: 0.0, zIndex: 10 },
-  { rot: 7, scale: 0.9346, x: 11, y: 1.3, zIndex: 3 },
-  { rot: 14, scale: 0.8498, x: 22, y: 4.0, zIndex: 2 },
-  { rot: 21, scale: 0.7756, x: 30, y: 7.3, zIndex: 1 }
+  { rot: 0, scale: 1, x: -28, y: 0, zIndex: 1 },
+  { rot: 0, scale: 1, x: -14, y: 0, zIndex: 2 },
+  { rot: 0, scale: 1, x: 0, y: 0, zIndex: 3 },
+  { rot: 0, scale: 1, x: 14, y: 0, zIndex: 2 },
+  { rot: 0, scale: 1, x: 28, y: 0, zIndex: 1 }
 ];
 
 function getResponsiveMultiplier(width: number) {
@@ -55,18 +56,17 @@ function getSlotConfig(totalCards: number, slot: number) {
   if (totalCards >= MAX_VISIBLE) return FAN_POSITIONS[slot];
   const center = totalCards >> 1;
   const distance = totalCards > 1 ? (slot - center) / center : 0;
-  const absDistance = Math.abs(distance);
   return {
-    rot: distance * 21,
-    scale: 1.0 - 0.2244 * absDistance * absDistance,
-    x: distance * 30,
-    y: absDistance * absDistance * 7.3,
+    rot: 0,
+    scale: 1,
+    x: distance * 28,
+    y: 0,
     zIndex: 10 - Math.abs(slot - center)
   };
 }
 
 const ARROW_CLASSES =
-  "relative flex items-center justify-center rounded-full border-[1.5px] border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-[16px] text-black/40 dark:text-white/55 cursor-pointer shrink-0 z-30 outline-none shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:border-black/25 dark:hover:border-white/25 hover:text-black/70 dark:hover:text-white/80 active:opacity-70 transition-colors duration-300 before:content-[''] before:absolute before:inset-[3px] before:rounded-full before:border before:border-black/[0.04] dark:before:border-white/[0.04] before:pointer-events-none";
+  "relative z-30 flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] border-primary/30 bg-primary text-white shadow-soft outline-none transition-colors duration-300 hover:border-primary-strong hover:bg-primary-strong active:opacity-70 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2";
 
 export default function SocialCards({ cards }: SocialCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,6 +105,13 @@ export default function SocialCards({ cards }: SocialCardsProps) {
     },
     [totalCards, needsPagination]
   );
+
+  useEffect(() => {
+    if (!needsPagination || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = window.setInterval(() => cycle("right"), AUTO_ADVANCE_MS);
+    return () => window.clearInterval(timer);
+  }, [cycle, needsPagination]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -314,7 +321,7 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   );
 
   return (
-    <section className="relative z-20 flex w-full flex-col items-center px-4 py-4 md:px-8 lg:py-8">
+    <section className="relative z-20 flex w-full flex-col items-center px-4 pb-2 md:px-8">
       <div className="flex w-full max-w-[90rem] items-center justify-center">
         <div
           ref={containerRef}
@@ -323,12 +330,20 @@ export default function SocialCards({ cards }: SocialCardsProps) {
           {cards.map((card, index) => {
             const image = (
               <div className="relative h-full w-full overflow-hidden">
-                <img
+                <Image
                   src={card.imgUrl}
-                  loading="lazy"
-                  alt={card.alt || `Card ${index}`}
-                  className="absolute inset-0 z-10 h-full w-full object-cover"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 13rem, (min-width: 768px) 11rem, 9rem"
+                  className="z-10 object-cover"
                 />
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-secondary via-secondary/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 z-30 p-4 text-white md:p-5">
+                  <h3 className="font-heading text-lg leading-tight md:text-2xl">{card.title}</h3>
+                  <p className="mt-1 line-clamp-2 text-[11px] leading-4 text-white/80 md:text-xs">
+                    {card.description}
+                  </p>
+                </div>
               </div>
             );
             return card.linkUrl ? (

@@ -12,6 +12,7 @@ interface ProductsPageProps {
     query?: string | string[];
     subcategory?: string | string[];
     firmness?: string | string[];
+    usecase?: string | string[];
   }>;
 }
 
@@ -35,6 +36,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         initialQuery={firstValue(params.query)}
         initialSubcategory={firstValue(params.subcategory)}
         initialFirmness={firstValue(params.firmness)}
+        initialUsecase={firstValue(params.usecase)}
       />
     </div>
   );

@@ -7,8 +7,8 @@ import { FeelTheDifference } from "@/components/home/feel-the-difference";
 import { FinalCta } from "@/components/home/final-cta";
 import { HeroSection } from "@/components/home/hero-section";
 import { InsideTheMattress } from "@/components/home/inside-the-mattress";
+import { ShopByNeedsCarousel } from "@/components/home/shop-by-needs-carousel";
 import { ShowroomCta } from "@/components/home/showroom-cta";
-import { SleepSelector } from "@/components/home/sleep-selector";
 import { TestimonialsScroller } from "@/components/home/testimonials-scroller";
 import testimonialsData from "@/data/testimonials.json";
 import { listProducts } from "@/lib/db/products";
@@ -54,8 +54,8 @@ export default async function Home() {
   return (
     <>
       <HeroSection />
-      <SleepSelector />
       <CategoryGallery />
+      <ShopByNeedsCarousel />
       <FeaturedCollection />
       <InsideTheMattress />
       <FeelTheDifference />

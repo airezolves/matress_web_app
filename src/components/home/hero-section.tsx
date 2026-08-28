@@ -12,7 +12,6 @@ import {
 } from "framer-motion";
 import { ArrowRight, MoveRight, ShieldCheck, Star, Sparkles } from "lucide-react";
 
-import CardFanCarousel, { type CardItem } from "@/components/ui/card-fan-carousel";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -27,17 +26,6 @@ const HeroBed3D = dynamic(() => import("./hero-bed-3d"), {
 });
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-const heroCards: CardItem[] = [
-  { imgUrl: "/images/home_page/product_categories/spring-mattresses.svg", alt: "Spring mattresses", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/foam-mattresses.svg", alt: "Foam mattresses", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/latex-mattresses.svg", alt: "Latex mattresses", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/coir-mattresses.svg", alt: "Coir mattresses", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/orthopaedic.svg", alt: "Orthopaedic range", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/pillows.svg", alt: "Pillows", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/accessories.svg", alt: "Sleep accessories", linkUrl: "/products" },
-  { imgUrl: "/images/home_page/product_categories/mattress.png", alt: "Signature mattress", linkUrl: "/products" }
-];
 
 const trustStats = [
   { value: "20+ years", label: "of craftsmanship" },
@@ -212,15 +200,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* 3D fan carousel of product categories */}
-      <motion.div
-        initial={{ opacity: 0, y: reduceMotion ? 0 : 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: reduceMotion ? 0 : 0.8, ease: EASE, delay: reduceMotion ? 0 : 0.3 }}
-        className="mt-6 md:mt-10"
-      >
-        <CardFanCarousel cards={heroCards} />
-      </motion.div>
     </section>
   );
 }
