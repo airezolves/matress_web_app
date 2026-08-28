@@ -28,17 +28,20 @@ interface ProductsCatalogViewProps {
   initialProducts: Product[];
   initialQuery?: string;
   initialSubcategory?: string;
+  initialFirmness?: string;
 }
 
 export function ProductsCatalogView({
   initialProducts,
   initialQuery = "",
-  initialSubcategory = ""
+  initialSubcategory = "",
+  initialFirmness = ""
 }: ProductsCatalogViewProps) {
   const [query, setQuery] = useState(initialQuery);
   const [filters, setFilters] = useState<ProductFilters>(() => ({
     ...initialFilters,
-    subcategory: initialSubcategory ? [initialSubcategory] : []
+    subcategory: initialSubcategory ? [initialSubcategory] : [],
+    firmness: initialFirmness ? [initialFirmness] : []
   }));
   const [sortBy, setSortBy] = useState("name-asc");
 

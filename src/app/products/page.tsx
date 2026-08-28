@@ -11,6 +11,7 @@ interface ProductsPageProps {
   searchParams: Promise<{
     query?: string | string[];
     subcategory?: string | string[];
+    firmness?: string | string[];
   }>;
 }
 
@@ -33,6 +34,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         initialProducts={products}
         initialQuery={firstValue(params.query)}
         initialSubcategory={firstValue(params.subcategory)}
+        initialFirmness={firstValue(params.firmness)}
       />
     </div>
   );

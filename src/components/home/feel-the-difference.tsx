@@ -1,103 +1,130 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Check } from "lucide-react";
+
+import FirmnessMattress3D, { type FirmnessLabel } from "@/components/home/firmness-mattress-3d";
 
 const feels = [
   {
-    threshold: 33,
-    label: "Soft",
-    description: "Plush comfort for pressure relief.",
-    traits: ["Deep contouring", "Shoulder & hip relief", "Cradling feel"]
+    label: "Super Soft",
+    description: "Deep cushioning that gently cradles the body.",
+    traits: ["Plush surface", "Deep contouring", "Pressure relief"],
   },
   {
-    threshold: 66,
+    label: "Medium Soft",
+    description: "Cushioned comfort with a supportive foundation.",
+    traits: ["Soft cushioning", "Balanced support", "Gentle contouring"],
+  },
+  {
     label: "Medium",
-    description: "Balanced comfort and support.",
-    traits: ["Versatile support", "Even weight balance", "Adaptable feel"]
+    description: "An even balance of comfort and stable support.",
+    traits: ["Versatile feel", "Even weight balance", "Responsive support"],
   },
   {
-    threshold: 101,
-    label: "Firm",
-    description: "Stable support for deeper alignment.",
-    traits: ["Spinal alignment", "Minimal sink", "Structured support"]
-  }
-];
+    label: "Medium Firm",
+    description: "Stronger support with controlled cushioning.",
+    traits: ["Stable surface", "Reduced sink", "Structured support"],
+  },
+] as const satisfies ReadonlyArray<{ label: FirmnessLabel; description: string; traits: readonly string[] }>;
 
-function resolveFeel(value: number) {
-  return feels.find((feel) => value < feel.threshold) ?? feels[feels.length - 1];
-}
+type Feel = (typeof feels)[number];
 
 export function FeelTheDifference() {
   const reduce = useReducedMotion();
-  const [value, setValue] = useState(50);
-  const feel = resolveFeel(value);
-  const compression = 1 - (value / 100) * 0.06;
+  const [selectedFeel, setSelectedFeel] = useState<Feel>(feels[1]);
 
   return (
     <section className="px-4 py-24 md:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
-            Interactive
+            Find your comfort
           </p>
           <h2 className="mt-3 font-heading text-4xl text-secondary md:text-6xl">
             Feel the difference.
           </h2>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            Choose the support level that feels right, then explore matching mattresses.
+          </p>
         </div>
 
-        <div className="grid items-center gap-12 rounded-[2.5rem] border border-border bg-white p-8 shadow-glow md:grid-cols-2 md:p-12">
-          <div className="relative flex h-64 items-center justify-center">
-            <div className="absolute h-40 w-full max-w-sm rounded-3xl bg-gradient-to-br from-brand-lavender to-brand-ivory" />
-            <motion.div
-              animate={reduce ? undefined : { scaleY: compression }}
-              transition={{ type: "spring", stiffness: 120, damping: 14 }}
-              style={{ transformOrigin: "bottom" }}
-              className="relative h-44 w-full max-w-sm"
-            >
-              <Image
-                src="/images/home_page/product_categories/mattress.png"
-                alt="Mattress firmness preview"
-                fill
-                className="object-contain drop-shadow-xl"
-              />
-            </motion.div>
-          </div>
+        <div className="overflow-hidden rounded-[var(--radius-card)] border border-border/80 bg-white shadow-glow">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="relative flex min-h-[340px] items-center justify-center overflow-hidden bg-brand-neutral p-8 sm:min-h-[440px] sm:p-12">
+              <FirmnessMattress3D firmness={selectedFeel.label} />
 
-          <div>
-            <div className="flex items-baseline justify-between">
-              <h3 className="font-heading text-4xl text-secondary">{feel.label}</h3>
-              <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                {value < 33 ? "Soft" : value < 66 ? "Medium" : "Firm"}
-              </span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={selectedFeel.label}
+                  initial={reduce ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? undefined : { opacity: 0, y: -8 }}
+                  className="absolute bottom-6 rounded-full border border-white/80 bg-white/90 px-4 py-2 text-sm font-semibold text-secondary shadow-soft backdrop-blur"
+                >
+                  {selectedFeel.label} feel
+                </motion.span>
+              </AnimatePresence>
             </div>
-            <p className="mt-3 text-lg text-muted-foreground">{feel.description}</p>
 
-            <div className="mt-8">
-              <div className="flex justify-between text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                <span>Soft</span>
-                <span>Firm</span>
+            <div className="flex flex-col p-6 sm:p-10 lg:p-12">
+              <div className="grid grid-cols-2 gap-2" role="group" aria-label="Choose mattress firmness">
+                {feels.map((feel) => {
+                  const selected = feel.label === selectedFeel.label;
+
+                  return (
+                    <button
+                      key={feel.label}
+                      type="button"
+                      onClick={() => setSelectedFeel(feel)}
+                      aria-pressed={selected}
+                      className={`flex min-h-12 items-center justify-center gap-2 rounded-[var(--radius-button)] border px-3 py-2 text-sm font-semibold transition ${
+                        selected
+                          ? "border-primary bg-primary text-white shadow-soft"
+                          : "border-border bg-white text-secondary hover:border-primary/50 hover:bg-brand-lavender/30"
+                      }`}
+                    >
+                      {selected && <Check className="h-4 w-4" />}
+                      {feel.label}
+                    </button>
+                  );
+                })}
               </div>
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={value}
-                onChange={(event) => setValue(Number(event.target.value))}
-                aria-label="Adjust firmness"
-                className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-full bg-gradient-to-r from-brand-lavender via-accent to-primary accent-primary"
-              />
-            </div>
 
-            <ul className="mt-8 space-y-2">
-              {feel.traits.map((trait) => (
-                <li key={trait} className="flex items-center gap-3 text-sm text-secondary">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  {trait}
-                </li>
-              ))}
-            </ul>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedFeel.label}
+                  initial={reduce ? false : { opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={reduce ? undefined : { opacity: 0, x: -12 }}
+                  transition={{ duration: 0.25 }}
+                  className="mt-9"
+                >
+                  <h3 className="font-heading text-4xl text-secondary">{selectedFeel.label}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                    {selectedFeel.description}
+                  </p>
+                  <ul className="mt-6 space-y-3">
+                    {selectedFeel.traits.map((trait) => (
+                      <li key={trait} className="flex items-center gap-3 text-sm font-medium text-secondary">
+                        <span className="h-2 w-2 rounded-full bg-primary" />
+                        {trait}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
+
+              <Link
+                href={`/products?firmness=${encodeURIComponent(selectedFeel.label)}`}
+                className="mt-10 inline-flex h-12 items-center justify-center gap-2 rounded-[var(--radius-button)] bg-secondary px-5 text-sm font-semibold text-white transition hover:bg-secondary-strong"
+              >
+                View {selectedFeel.label.toLowerCase()} mattresses
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
