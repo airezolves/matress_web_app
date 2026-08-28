@@ -10,48 +10,41 @@ import { FadeUp } from "@/components/animation/motion-primitives";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 type GalleryCategory = {
-  number: string;
   name: string;
   description: string;
   image: string;
   href: string;
+  imageFit?: "contain" | "cover";
 };
 
 const categories: GalleryCategory[] = [
   {
-    number: "01",
     name: "Spring Collection",
     description: "Responsive support. Cooler sleep.",
-    image: "/images/home_page/product_categories/spring-mattresses.svg",
-    href: "/products?subcategory=Spring+Mattress"
+    image: "/images/home_page/product_categories/spring-mattress.jpg",
+    href: "/products?subcategory=Spring+Mattress",
+    imageFit: "cover",
   },
   {
-    number: "02",
     name: "Foam Collection",
     description: "Adaptive contouring for pressure relief.",
-    image: "/images/home_page/product_categories/foam-mattresses.svg",
-    href: "/products?subcategory=Foam+Mattress"
+    image: "/images/home_page/product_categories/foam-mattress.jpg",
+    href: "/products?subcategory=Foam+Mattress",
+    imageFit: "cover"
   },
   {
-    number: "03",
     name: "Latex Collection",
     description: "Natural breathability and resilience.",
-    image: "/images/home_page/product_categories/latex-mattresses.svg",
-    href: "/products?subcategory=Latex+Mattress"
+    image: "/images/home_page/product_categories/latex-mattress.jpg",
+    href: "/products?subcategory=Latex+Mattress",
+    imageFit: "cover",
   },
   {
-    number: "04",
-    name: "Orthopedic",
-    description: "Zoned alignment for deeper support.",
-    image: "/images/home_page/product_categories/orthopaedic.svg",
-    href: "/products?subcategory=Coir+Mattress"
-  },
-  {
-    number: "05",
-    name: "Pillows & Accessories",
-    description: "Finishing touches for better rest.",
-    image: "/images/home_page/product_categories/pillows.svg",
-    href: "/products?subcategory=Pillows"
+    name: "Coir Collection",
+    description: "Natural firmness and breathable support.",
+    image: "/images/home_page/product_categories/coir-mattress.png",
+    href: "/products?subcategory=Coir+Mattress",
+    imageFit: "cover"
   }
 ];
 
@@ -70,7 +63,7 @@ export function CategoryGallery() {
           </h2>
         </FadeUp>
 
-        <div className="flex gap-5 overflow-x-auto pb-4 no-scrollbar md:gap-6">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {categories.map((category, index) => (
             <motion.div
               key={category.name}
@@ -78,24 +71,31 @@ export function CategoryGallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: EASE, delay: index * 0.08 }}
-              className="group relative h-[340px] w-[78vw] shrink-0 overflow-hidden rounded-[2rem] border border-border bg-brand-neutral transition-all duration-500 sm:h-[400px] sm:w-[52vw] md:h-[460px] md:w-[40%] lg:w-[30%] md:hover:w-[42%]"
+              className="group min-w-0 overflow-hidden rounded-[var(--radius-card)] border border-border/80 bg-white shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-glow"
             >
-              <Link href={category.href} className="block h-full w-full">
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-lavender/30 to-brand-neutral" />
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  fill
-                  className="object-contain p-12 transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-secondary/10 to-transparent opacity-80" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-white">
-                  <p className="font-heading text-2xl text-white/60">{category.number}</p>
-                  <h3 className="mt-1 font-heading text-3xl">{category.name}</h3>
-                  <p className="mt-2 max-w-xs text-sm text-white/80">{category.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white">
-                    Explore Collection
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <Link href={category.href} className="flex h-full flex-col">
+                <div className="relative aspect-[4/3] overflow-hidden bg-brand-neutral">
+                  <Image
+                    src={category.image}
+                    alt={category.name}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className={`transition-transform duration-700 ease-out group-hover:scale-105 ${
+                      category.imageFit === "cover" ? "object-cover" : "object-contain p-8"
+                    }`}
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-heading text-2xl leading-tight text-secondary">{category.name}</h3>
+                  <p className="mt-2 min-h-10 text-sm leading-5 text-muted-foreground">
+                    {category.description}
+                  </p>
+                  <span className="mt-5 inline-flex items-center justify-between border-t border-border/70 pt-4 text-sm font-semibold text-primary">
+                    Explore collection
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-lavender/70 transition-colors group-hover:bg-primary group-hover:text-white">
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
                   </span>
                 </div>
               </Link>

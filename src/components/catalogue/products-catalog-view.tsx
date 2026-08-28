@@ -24,9 +24,22 @@ const initialFilters: ProductFilters = {
   brand: []
 };
 
-export function ProductsCatalogView({ initialProducts }: { initialProducts: Product[] }) {
-  const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState<ProductFilters>(initialFilters);
+interface ProductsCatalogViewProps {
+  initialProducts: Product[];
+  initialQuery?: string;
+  initialSubcategory?: string;
+}
+
+export function ProductsCatalogView({
+  initialProducts,
+  initialQuery = "",
+  initialSubcategory = ""
+}: ProductsCatalogViewProps) {
+  const [query, setQuery] = useState(initialQuery);
+  const [filters, setFilters] = useState<ProductFilters>(() => ({
+    ...initialFilters,
+    subcategory: initialSubcategory ? [initialSubcategory] : []
+  }));
   const [sortBy, setSortBy] = useState("name-asc");
 
   const products = useProducts({ products: initialProducts, query, filters, sortBy });

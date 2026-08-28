@@ -7,7 +7,19 @@ export const dynamic = "force-dynamic";
 
 export const metadata = createMetadata("Products", "Browse, search, and filter all products.");
 
-export default async function ProductsPage() {
+interface ProductsPageProps {
+  searchParams: Promise<{
+    query?: string | string[];
+    subcategory?: string | string[];
+  }>;
+}
+
+function firstValue(value?: string | string[]) {
+  return Array.isArray(value) ? value[0] ?? "" : value ?? "";
+}
+
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  const params = await searchParams;
   const products = await listProducts();
 
   return (
@@ -17,7 +29,11 @@ export default async function ProductsPage() {
         title="Discover Premium Sleep Products"
         description="Use advanced filters, live search, and category combinations to shortlist quickly."
       />
-      <ProductsCatalogView initialProducts={products} />
+      <ProductsCatalogView
+        initialProducts={products}
+        initialQuery={firstValue(params.query)}
+        initialSubcategory={firstValue(params.subcategory)}
+      />
     </div>
   );
 }
