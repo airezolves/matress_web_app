@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Check, Heart, Plus } from "lucide-react";
+import { ArrowUpRight, Check, Heart, ShoppingCart } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
@@ -102,7 +102,7 @@ export function ProductCard({ product }: { product: Product }) {
                 transition={{ duration: 0.25, ease: EASE }}
                 className="flex items-center gap-2"
               >
-                <Plus className="h-4 w-4" />
+                <ShoppingCart className="h-4 w-4" />
                 Add to Cart
               </motion.span>
             )}

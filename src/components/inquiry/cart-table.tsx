@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Sparkles, Trash2 } from "lucide-react";
+import { MessageCircle, ShoppingCart, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
@@ -34,7 +34,7 @@ export function InquiryCartTable() {
     return (
       <div className="rounded-[var(--radius-card)] border border-dashed border-border bg-white p-12 text-center shadow-soft">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <Sparkles className="h-6 w-6" />
+          <ShoppingCart className="h-6 w-6" />
         </span>
         <h2 className="mt-5 font-heading text-3xl uppercase tracking-[0.08em] text-secondary">
           Your cart is empty

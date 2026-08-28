@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Menu, Sparkles, X } from "lucide-react";
+import { Download, Menu, ShoppingCart, X } from "lucide-react";
 
 import { navigationItems } from "@/constants/navigation";
 import { siteConfig } from "@/constants/site";
@@ -72,11 +72,18 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
+            href="/download-catalogue"
+            className="hidden h-11 items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-4 text-sm font-semibold text-primary transition hover:border-primary hover:bg-primary/10 md:inline-flex"
+          >
+            <Download className="h-4 w-4" />
+            Download Catalogue
+          </Link>
+          <Link
             href="/inquiry-cart"
             className="relative inline-flex h-11 items-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-strong active:scale-95"
             aria-label="Open my cart"
           >
-            <Sparkles className="h-4 w-4" />
+            <ShoppingCart className="h-4 w-4" />
             <span className="hidden sm:inline">My Cart</span>
             {count > 0 && (
               <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-primary">
@@ -109,6 +116,14 @@ export function Navbar() {
             className="absolute left-3 right-3 top-[4.5rem] rounded-3xl border border-border bg-background/95 p-4 shadow-glow backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
           >
             <div className="flex flex-col gap-1">
+              <Link
+                href="/download-catalogue"
+                onClick={() => setMobileOpen(false)}
+                className="mb-2 inline-flex items-center gap-2 rounded-2xl bg-primary px-4 py-3 text-base font-semibold text-white"
+              >
+                <Download className="h-4 w-4" />
+                Download Catalogue
+              </Link>
               {navigationItems.map((item) => {
                 const active = pathname === item.href;
                 return (
