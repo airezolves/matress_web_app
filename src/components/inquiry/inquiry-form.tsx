@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, LoaderCircle, MessageCircle, Send, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, LoaderCircle, MessageCircle, Send, ShoppingCart } from "lucide-react";
 import { useForm, type Path } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -260,7 +260,7 @@ export function InquiryForm() {
                   {selectionNames.length > 0 ? (
                     <div className="rounded-2xl border border-border bg-brand-ivory p-4">
                       <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                        <Sparkles className="h-3.5 w-3.5" />
+                        <ShoppingCart className="h-3.5 w-3.5" />
                         Your selection
                       </p>
                       <ul className="mt-2 space-y-1 text-sm text-secondary">

@@ -3,6 +3,7 @@ export interface ProductFeatureTiles {
   coverType?: string;
   usp?: string;
   coreMaterial?: string;
+  dimensions?: string;
 }
 
 export interface ProductTestimonial {

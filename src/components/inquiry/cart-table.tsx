@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Sparkles, Trash2 } from "lucide-react";
+import { MessageCircle, ShoppingCart, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
@@ -34,7 +34,7 @@ export function InquiryCartTable() {
     return (
       <div className="rounded-[var(--radius-card)] border border-dashed border-border bg-white p-12 text-center shadow-soft">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <Sparkles className="h-6 w-6" />
+          <ShoppingCart className="h-6 w-6" />
         </span>
         <h2 className="mt-5 font-heading text-3xl uppercase tracking-[0.08em] text-secondary">
           Your cart is empty
@@ -68,12 +68,21 @@ export function InquiryCartTable() {
             key={item.productId}
             className="flex flex-col gap-4 rounded-[var(--radius-card)] border border-border bg-white p-4 shadow-soft sm:flex-row sm:items-center"
           >
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl sm:aspect-auto sm:h-24 sm:w-32">
+            <Link
+              href={`/products/${item.product.slug}`}
+              aria-label={`View ${item.product.name}`}
+              className="relative aspect-[4/3] w-full overflow-hidden rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 sm:aspect-auto sm:h-24 sm:w-32"
+            >
               <Image src={item.product.images[0]} alt={item.product.name} fill className="object-cover" />
-            </div>
+            </Link>
 
             <div className="min-w-0 flex-1">
-              <p className="font-heading text-2xl leading-tight text-secondary">{item.product.name}</p>
+              <Link
+                href={`/products/${item.product.slug}`}
+                className="font-heading text-2xl leading-tight text-secondary transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+              >
+                {item.product.name}
+              </Link>
               <p className="text-sm text-muted-foreground">{item.product.subcategory}</p>
             </div>
 

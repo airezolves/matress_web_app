@@ -4,7 +4,7 @@ import { siteConfig } from "@/constants/site";
 import { createInquiry } from "@/lib/db/inquiries";
 import { getProductById } from "@/lib/db/products";
 import { WhatsAppService } from "@/services/whatsapp-service";
-import type { InquiryRequest, InquiryResponse } from "@/types/inquiry";
+import type { CatalogueRequestPayload, InquiryRequest, InquiryResponse } from "@/types/inquiry";
 import type { Product } from "@/types/product";
 
 const whatsappService = new WhatsAppService();
@@ -36,6 +36,28 @@ export const inquiryService = {
     return {
       success: true,
       message: `Inquiry received. Our team at ${siteConfig.name} will contact you shortly.`,
+      inquiryId
+    };
+  },
+
+  async submitCatalogueRequest(customer: CatalogueRequestPayload): Promise<InquiryResponse> {
+    const inquiryId = randomUUID();
+
+    await createInquiry({
+      id: inquiryId,
+      customer: {
+        ...customer,
+        whatsappNumber: customer.phone,
+        address: `Catalogue request from ${customer.city}`,
+        message: "Website catalogue download request"
+      },
+      productIds: [],
+      productNames: []
+    });
+
+    return {
+      success: true,
+      message: "Your catalogue is ready to download.",
       inquiryId
     };
   }

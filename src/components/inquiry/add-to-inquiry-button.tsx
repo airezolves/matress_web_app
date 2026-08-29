@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Check, Plus } from "lucide-react";
+import { Check, ShoppingCart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useInquiryCart } from "@/context/inquiry-cart-context";
@@ -45,7 +45,7 @@ export function AddToInquiryButton({ productId }: { productId: string }) {
               transition={{ duration: 0.25, ease: EASE }}
               className="flex items-center gap-2"
             >
-              <Plus className="h-5 w-5" />
+              <ShoppingCart className="h-5 w-5" />
               Add to My Cart
             </motion.span>
           )}
